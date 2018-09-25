@@ -1,0 +1,39 @@
+.details-info {
+  padding: 0 1rem 1rem 1rem;
+}
+
+.details-info .title-rating-row {
+  display: flex;
+  border-bottom: 1px solid #333;
+  align-items: center;
+}
+
+.details-info .title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.details-info .rating {
+  display: flex;
+  margin-left: auto;
+}
+
+.details-info .rating-text {
+  font-size: 2rem;
+  margin-left: 0.5rem;
+}
+
+.details-info .rating-scale {
+  color: #999;
+}
+
+.details-info .overview-header {
+  color: #fff;
+}
+
+.details-info .overview {
+  color: #fff;
+  border-bottom: 1px solid #333;
+  padding-bottom: 1rem;
+}

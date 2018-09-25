@@ -1,0 +1,7 @@
+.pinning-header {
+  height: 68px;
+  width: 100%;
+  position: fixed;
+  background: #141414;
+  z-index: 999;
+}

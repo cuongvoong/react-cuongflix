@@ -1,0 +1,43 @@
+.trailer-modal {
+  background-color: rgba(0, 0, 0, 1);
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.trailer-modal .content {
+  width: 100px;
+  transition: 0.5s;
+}
+
+.trailer-modal .close {
+  background: #000;
+  border: none;
+  outline: none;
+  position: absolute;
+  top: 1%;
+  right: 20px;
+  z-index: 10;
+}
+
+.trailer-modal .iframe-container {
+  overflow: hidden;
+  padding-top: 56.25%;
+  position: relative;
+}
+
+.trailer-modal .iframe-container iframe {
+  border: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}

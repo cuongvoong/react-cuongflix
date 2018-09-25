@@ -1,0 +1,10 @@
+.movie .poster,
+.tvshow .poster {
+  margin-left: 1rem;
+  padding: 5px 5px 0 0;
+}
+
+.poster > img {
+  width: 100%;
+  display: block;
+}

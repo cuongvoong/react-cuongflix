@@ -1,0 +1,28 @@
+.main-header .tabbed-primary-navigation {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.main-header .tabbed-primary-navigation .navigation-tab {
+  height: 100%;
+  list-style-type: none;
+  transition: color 0.4s;
+  margin-left: 18px;
+}
+
+.main-header .tabbed-primary-navigation .navigation-tab a {
+  text-decoration: none;
+  position: relative;
+  transition: color 0.4s;
+  color: #e5e5e5;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.main-header .tabbed-primary-navigation .navigation-tab a:hover {
+  color: #b3b3b3;
+}

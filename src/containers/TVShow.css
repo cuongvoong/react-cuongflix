@@ -1,0 +1,9 @@
+.tvshow {
+  display: flex;
+  flex-direction: column;
+}
+
+.tvshow .poster-trailer-row {
+  display: grid;
+  grid-template-columns: 16fr 41fr;
+}

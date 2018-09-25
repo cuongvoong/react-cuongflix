@@ -1,0 +1,14 @@
+.gallery-item {
+  /* width: 33.3333333%; */
+  /* margin: 0.3rem; */
+  box-sizing: border-box;
+  transition: transform 0.3s;
+}
+
+.gallery-item:hover {
+  transform: scale(1.5);
+}
+
+.gallery-item img {
+  width: 100%;
+}

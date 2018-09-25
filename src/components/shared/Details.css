@@ -1,0 +1,6 @@
+.details {
+  display: grid;
+  grid-template-columns: minmax(75%, 3fr) 1fr;
+  color: #fff;
+  box-sizing: border-box;
+}

@@ -1,0 +1,110 @@
+.slider .slider-item {
+  z-index: 1;
+  width: 33.33333333%;
+  height: 100%;
+  display: inline-block;
+  position: relative;
+  white-space: normal;
+  vertical-align: top;
+  box-sizing: border-box;
+  transition: 400ms transform;
+}
+
+.slider-item a {
+  margin: 0 2px;
+  text-decoration: none;
+  color: #fff;
+  display: block;
+}
+
+/* .slider-item:not(:first-child):hover {
+  transform: scale(1.5);
+  transition: 0.3s;
+  z-index: 100;
+} */
+
+/* .slider-item:first-child:hover {
+  transform: translate3d(55px, 0, 0) scale(1.5);
+  transition: 0.3s;
+  z-index: 10;
+} */
+
+.slider-item img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  /* transition: 0.3s; */
+}
+
+/* .slider-item:first-child:hover ~ .slider-item {
+  transform: translate3d(100px, 0, 0);
+}
+
+.slider-item:not(:first-child):hover ~ .slider-item {
+  transform: translate3d(45px, 0, 0);
+} */
+
+.slider-item .movie-text-overlay {
+  position: absolute;
+  /* padding-top: 18vw; */
+  padding-left: 4%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  /* transition: 0.3s; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.slider-item:hover .movie-text-overlay {
+  opacity: 1;
+}
+
+.movie-text-overlay span {
+  transition: 0.3s;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.movie-text-overlay .movie-title,
+.movie-text-overlay .tvShow-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.movie-text-overlay .rating {
+  font-size: 1rem;
+}
+
+.slider-item:hover .movie-text-overlay .movie-title {
+  font-size: 1rem;
+}
+
+@media screen and (min-width: 500px) {
+  .slider .slider-item {
+    width: 33.33333333%;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .slider .slider-item {
+    width: 25%;
+  }
+}
+
+@media screen and (min-width: 950px) {
+  .slider .slider-item {
+    width: 20%;
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .slider .slider-item {
+    width: 16.66666667%;
+  }
+}

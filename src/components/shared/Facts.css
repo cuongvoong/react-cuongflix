@@ -1,0 +1,36 @@
+.facts {
+  padding: 0 1rem 1rem 1rem;
+  background: #222;
+  height: 100%;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  z-index: 20;
+}
+
+.facts h3,
+.facts h4 {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.facts .status-text,
+.facts .release-date,
+.facts .homepage-text {
+  font-size: 0.9rem;
+}
+
+.facts .homepage-text a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.facts .genre-label {
+  display: inline-block;
+  font-size: 0.9rem;
+  background: #fff;
+  color: #000;
+  border: 1px solid #333;
+  margin: 3px;
+  padding: 6px;
+  text-transform: uppercase;
+}

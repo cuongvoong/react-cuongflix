@@ -1,0 +1,4 @@
+.videos .video-trailers {
+  display: flex;
+  flex-wrap: wrap;
+}

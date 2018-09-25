@@ -1,0 +1,19 @@
+.cast {
+  width: 100%;
+  /* max-width: 900px; */
+  overflow-x: hidden;
+
+  display: flex;
+  transition: 0.1s;
+  box-sizing: border-box;
+}
+
+.cast .name {
+  padding: 10px 10px 5px 10px;
+  font-weight: 600;
+}
+
+.cast .character {
+  font-size: 0.9rem;
+  padding: 0 10px;
+}

@@ -1,0 +1,14 @@
+.card {
+  margin-right: 0.5rem;
+  max-width: 150px;
+  border: 1px solid #3e3e3e;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+}
+
+.card .no-profile {
+  width: 138px;
+  height: 175px;
+  padding: 30px 27px 45px 27px;
+  box-sizing: border-box;
+}
