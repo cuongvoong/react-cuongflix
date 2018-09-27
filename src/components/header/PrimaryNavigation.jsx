@@ -1,7 +1,6 @@
 import React from "react";
 import "./PrimaryNavigation.css";
 import MainViewLink from "./MainViewLink";
-// import { Link } from "react-router-dom";
 
 const PrimaryNavigation = () => {
   return (

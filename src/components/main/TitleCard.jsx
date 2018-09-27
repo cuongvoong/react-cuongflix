@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./TitleCard.css";
 import { Link } from "react-router-dom";
 
@@ -57,5 +58,10 @@ class TitleCard extends Component {
     );
   }
 }
+
+TitleCard.propTypes = {
+  href: PropTypes.string.isRequired,
+  item: PropTypes.object.isRequired
+};
 
 export default TitleCard;

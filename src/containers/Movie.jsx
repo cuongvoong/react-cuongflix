@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./Movie.css";
 import Details from "../components/shared/Details";
 import Poster from "../components/shared/Poster";
@@ -7,8 +8,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import {
   fetchMovieDetails,
-  fetchMovieCredits,
-  setLoading
+  fetchMovieCredits
 } from "../store/actions/movieActions";
 
 class Movie extends Component {
@@ -16,7 +16,6 @@ class Movie extends Component {
     const { id } = this.props.match.params;
     this.props.fetchMovieDetails(id);
     this.props.fetchMovieCredits(id);
-    // }
   }
 
   render() {
@@ -43,11 +42,26 @@ class Movie extends Component {
   }
 }
 
+Movie.propTypes = {
+  fetchMovieDetails: PropTypes.func.isRequired,
+  fetchMovieCredits: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired
+    })
+  }),
+  movie: PropTypes.shape({
+    isLoading: PropTypes.bool.isRequired,
+    details: PropTypes.object.isRequired,
+    credits: PropTypes.object.isRequired
+  })
+};
+
 const mapStateToProps = state => ({
   movie: state.movie
 });
 
 export default connect(
   mapStateToProps,
-  { fetchMovieDetails, fetchMovieCredits, setLoading }
+  { fetchMovieDetails, fetchMovieCredits }
 )(Movie);

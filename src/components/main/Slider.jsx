@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./Slider.css";
 import SliderItem from "./SliderItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -287,5 +288,12 @@ class Slider extends Component {
     );
   }
 }
+
+Slider.propTypes = {
+  href: PropTypes.string.isRequired,
+  results: PropTypes.object.isRequired,
+  columnsInRow: PropTypes.number.isRequired,
+  totalItems: PropTypes.number.isRequired
+};
 
 export default Slider;

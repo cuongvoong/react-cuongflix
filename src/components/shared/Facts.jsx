@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./Facts.css";
 
 const Facts = ({ details }) => {
@@ -77,6 +78,10 @@ const Facts = ({ details }) => {
       )}
     </section>
   );
+};
+
+Facts.propTypes = {
+  details: PropTypes.object.isRequired
 };
 
 const formatMoney = amount => {

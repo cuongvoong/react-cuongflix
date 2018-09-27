@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./Poster.css";
 
 const Poster = ({ details }) => {
@@ -14,6 +15,10 @@ const Poster = ({ details }) => {
       />
     </section>
   );
+};
+
+Poster.propTypes = {
+  details: PropTypes.object.isRequired
 };
 
 export default Poster;

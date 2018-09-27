@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./VideoTrailer.css";
 
 const VideoTrailer = ({ videoKey }) => {
@@ -16,6 +17,10 @@ const VideoTrailer = ({ videoKey }) => {
       </section>
     </section>
   );
+};
+
+Credits.propTypes = {
+  videoKey: PropTypes.string.isRequired
 };
 
 export default VideoTrailer;

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Provider, connect } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import store from "../store";
@@ -8,7 +9,7 @@ import {
   detectMobile
 } from "../store/actions/windowActions";
 import CuongFlix from "./CuongFlix";
-import ScrollToTop from "../components/ScrollToTop";
+import ScrollToTop from "./ScrollToTop";
 
 class App extends Component {
   componentDidMount() {
@@ -42,6 +43,11 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  updateWindowState: PropTypes.func.isRequired,
+  detectMobile: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   window: state.window

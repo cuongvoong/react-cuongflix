@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./Home.css";
-import Billboard from "../components/main/billboard/Billboard";
+import Billboard from "../components/home/Billboard";
 import { connect } from "react-redux";
 import {
   fetchDiscoverMovies,
@@ -70,6 +71,14 @@ class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  fetchDiscoverMovies: PropTypes.func.isRequired,
+  fetchDiscoverTVShows: PropTypes.func.isRequired,
+  fetchBillboardVideos: PropTypes.func.isRequired,
+  clearSearchTerm: PropTypes.func.isRequired,
+  updateSearchBoxFocus: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   discover: state.discover,

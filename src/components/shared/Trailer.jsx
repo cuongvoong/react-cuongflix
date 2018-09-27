@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./Trailer.css";
 
 const Trailer = ({ trailers }) => {
@@ -28,6 +29,12 @@ const Trailer = ({ trailers }) => {
       </section>
     </section>
   );
+};
+
+Trailer.propTypes = {
+  trailers: PropTypes.shape({
+    results: PropTypes.array.isRequired
+  })
 };
 
 export default Trailer;

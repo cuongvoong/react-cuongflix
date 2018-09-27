@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./GalleryContent.css";
 import GalleryItem from "./GalleryItem";
 
@@ -30,6 +31,17 @@ const GalleryContent = ({ search }) => {
       )}
     </div>
   );
+};
+
+GalleryContent.propTypes = {
+  search: PropTypes.shape({
+    movies: PropTypes.shape({
+      results: PropTypes.array.isRequired
+    }),
+    tvShows: PropTypes.shape({
+      results: PropTypes.array.isRequired
+    })
+  })
 };
 
 export default GalleryContent;

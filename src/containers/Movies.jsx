@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./Movies.css";
 import InTheatresRow from "../components/movies/InTheatresRow";
 import TopRatedRow from "../components/movies/TopRatedRow";
@@ -57,6 +58,15 @@ class Movies extends Component {
     );
   }
 }
+
+Movies.propTypes = {
+  fetchInTheatres: PropTypes.func.isRequired,
+  fetchPopular: PropTypes.func.isRequired,
+  fetchUpcoming: PropTypes.func.isRequired,
+  fetchTopRated: PropTypes.func.isRequired,
+  clearSearchTerm: PropTypes.func.isRequired,
+  updateSearchBoxFocus: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   movies: state.movies,

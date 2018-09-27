@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./Card.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -22,6 +23,10 @@ const Card = ({ castMember }) => {
       <section className="character">{castMember.character}</section>
     </section>
   );
+};
+
+Card.propTypes = {
+  castMember: PropTypes.object.isRequired
 };
 
 export default Card;

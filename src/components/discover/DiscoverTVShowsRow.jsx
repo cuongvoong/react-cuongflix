@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import RowHeader from "../main/RowHeader";
 import Row from "../main/Row";
 
@@ -14,6 +15,15 @@ const DiscoverTVShowsRow = ({ tvShows, columnsInRow, totalItems }) => {
       />
     </React.Fragment>
   );
+};
+
+DiscoverTVShowsRow.propTypes = {
+  tvShows: PropTypes.shape({
+    page: PropTypes.number.isRequired,
+    results: PropTypes.array.isRequired
+  }),
+  columnsInRow: PropTypes.number.isRequired,
+  totalItems: PropTypes.number.isRequired
 };
 
 export default DiscoverTVShowsRow;

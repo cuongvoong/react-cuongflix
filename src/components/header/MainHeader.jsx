@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import logo from "../../assets/images/logo.svg";
 import "./MainHeader.css";
 import PrimaryNavigation from "./PrimaryNavigation";
@@ -34,5 +35,13 @@ class MainHeader extends Component {
     );
   }
 }
+
+MainHeader.propTypes = {
+  onSearchInputChange: PropTypes.func.isRequired,
+  onSearchBoxClose: PropTypes.func.isRequired,
+  onSearchBoxFocus: PropTypes.func.isRequired,
+  isSearchBoxFocused: PropTypes.bool.isRequired,
+  term: PropTypes.string.isRequired
+};
 
 export default MainHeader;

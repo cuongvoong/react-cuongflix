@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./SecondaryNavigation.css";
 import SearchBox from "./SearchBox";
 
@@ -22,6 +23,14 @@ const SecondaryNavigation = ({
       </div>
     </div>
   );
+};
+
+SecondaryNavigation.propTypes = {
+  onSearchInputChange: PropTypes.func.isRequired,
+  onSearchBoxClose: PropTypes.func.isRequired,
+  onSearchBoxFocus: PropTypes.func.isRequired,
+  isSearchBoxFocused: PropTypes.bool.isRequired,
+  term: PropTypes.string.isRequired
 };
 
 export default SecondaryNavigation;

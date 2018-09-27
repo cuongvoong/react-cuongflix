@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./SearchBox.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
@@ -13,14 +14,12 @@ class SearchBox extends Component {
     super(props);
 
     this.searchBoxFocusing = null;
-    this.searchBoxAnimation = null;
     this.input = React.createRef();
   }
 
   state = {
-    isClosing: this.props.searchBoxClosing,
+    isClosing: false,
     isUserFocusing: this.props.isSearchBoxFocused
-    // term: this.props.term
   };
 
   componentDidUpdate(prevProps) {
@@ -52,7 +51,7 @@ class SearchBox extends Component {
   closeSearchBox = () => {
     this.props.onSearchBoxFocus(false);
     this.setState({ isClosing: true, isUserFocusing: false }, () => {
-      this.input.current.style.width = "20px";
+      this.input.current.style.width = "0px";
       this.input.current.style.opacity = 0;
 
       this.searchBoxClosing = setTimeout(() => {
@@ -91,7 +90,6 @@ class SearchBox extends Component {
               type="text"
               placeholder="Title, people, genres"
               maxLength="80"
-              // value={this.state.term}
               value={this.props.term}
               style={inputStyles}
             />
@@ -120,5 +118,13 @@ class SearchBox extends Component {
     );
   }
 }
+
+SearchBox.propTypes = {
+  onSearchInputChange: PropTypes.func.isRequired,
+  onSearchBoxClose: PropTypes.func.isRequired,
+  onSearchBoxFocus: PropTypes.func.isRequired,
+  isSearchBoxFocused: PropTypes.bool.isRequired,
+  term: PropTypes.string.isRequired
+};
 
 export default SearchBox;

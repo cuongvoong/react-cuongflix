@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./BillboardRow.css";
 import PlayButton from "./PlayButton";
 import TrailerModal from "./TrailerModal";
@@ -57,5 +58,23 @@ class BillboardRow extends Component {
     );
   }
 }
+
+BillboardRow.propTypes = {
+  discover: PropTypes.shape({
+    movies_page1: PropTypes.shape({
+      results: PropTypes.array.isRequired
+    }),
+    movies_page2: PropTypes.shape({
+      results: PropTypes.array.isRequired
+    }),
+    tvShows_page1: PropTypes.shape({
+      results: PropTypes.array.isRequired
+    }),
+    tvShows_page2: PropTypes.shape({
+      results: PropTypes.array.isRequired
+    })
+  }),
+  randomIndex: PropTypes.number.isRequired
+};
 
 export default BillboardRow;

@@ -1,9 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./DetailsInfo.css";
 import Credits from "./Credits";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import Videos from "./Videos";
+// import Videos from "./Videos";
 
 const DetailsInfo = ({ details, credits }) => {
   return (
@@ -28,6 +29,11 @@ const DetailsInfo = ({ details, credits }) => {
       {/* <Videos videos={details.videos} /> */}
     </section>
   );
+};
+
+DetailsInfo.propTypes = {
+  details: PropTypes.object.isRequired,
+  credits: PropTypes.object.isRequired
 };
 
 export default DetailsInfo;

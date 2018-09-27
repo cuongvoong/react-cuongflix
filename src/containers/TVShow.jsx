@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./TVShow.css";
 import Details from "../components/shared/Details";
 import Poster from "../components/shared/Poster";
@@ -40,6 +41,21 @@ class TVShow extends Component {
     );
   }
 }
+
+TVShow.propTypes = {
+  fetchTVShowDetails: PropTypes.func.isRequired,
+  fetchTVShowCredits: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired
+    })
+  }),
+  tvShow: PropTypes.shape({
+    isLoading: PropTypes.bool.isRequired,
+    details: PropTypes.object.isRequired,
+    credits: PropTypes.object.isRequired
+  })
+};
 
 const mapStateToProps = state => ({
   tvShow: state.tvShow

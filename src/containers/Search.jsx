@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import queryString from "query-string";
 import GalleryContent from "../components/search/GalleryContent";
 import { connect } from "react-redux";
@@ -6,13 +7,6 @@ import { fetchSearchResults } from "../store/actions/searchActions";
 import { withRouter } from "react-router-dom";
 
 class Search extends Component {
-  constructor(props) {
-    super(props);
-
-    // console.log(this.props.location.pathname);
-  }
-  state = {};
-
   componentDidUpdate(prevProps) {
     if (
       prevProps.location.search !== this.props.location.search &&
@@ -33,6 +27,10 @@ class Search extends Component {
     );
   }
 }
+
+Search.propTypes = {
+  fetchSearchResults: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   search: state.search

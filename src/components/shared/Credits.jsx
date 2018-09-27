@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./Credits.css";
 import Cast from "./Cast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -105,5 +106,9 @@ class Credits extends Component {
     );
   }
 }
+
+Credits.propTypes = {
+  credits: PropTypes.object.isRequired
+};
 
 export default Credits;

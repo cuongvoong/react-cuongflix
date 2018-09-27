@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./TVShows.css";
 import OnTVRow from "../components/tvShows/OnTVRow";
 import TopRatedRow from "../components/tvShows/TopRatedRow";
@@ -57,6 +58,15 @@ class TVShows extends Component {
     );
   }
 }
+
+TVShows.propTypes = {
+  fetchOnTV: PropTypes.func.isRequired,
+  fetchPopular: PropTypes.func.isRequired,
+  fetchAiringToday: PropTypes.func.isRequired,
+  fetchTopRated: PropTypes.func.isRequired,
+  clearSearchTerm: PropTypes.func.isRequired,
+  updateSearchBoxFocus: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   tvShows: state.tvShows,

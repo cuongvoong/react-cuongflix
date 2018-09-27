@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./Videos.css";
 import VideoTrailer from "./VideoTrailer";
 
@@ -16,6 +17,12 @@ const Videos = ({ videos }) => {
       <section className="video-trailers">{videoTrailersToRender}</section>
     </section>
   );
+};
+
+Videos.propTypes = {
+  videos: PropTypes.shape({
+    rseults: PropTypes.array.isRequired
+  })
 };
 
 export default Videos;

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./SliderItem.css";
 import TitleCard from "./TitleCard";
 
@@ -61,5 +62,15 @@ class SliderItem extends Component {
     );
   }
 }
+
+SliderItem.propTypes = {
+  sliderItemId: PropTypes.number.isRequired,
+  href: PropTypes.string.isRequired,
+  additionalClasses: PropTypes.string.isRequired,
+  viewportIndex: PropTypes.number.isRequired,
+  viewportPosition: PropTypes.string.isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired
+};
 
 export default SliderItem;

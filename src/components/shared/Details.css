@@ -1,6 +1,12 @@
 .details {
   display: grid;
-  grid-template-columns: minmax(75%, 3fr) 1fr;
+  grid-template-columns: 1fr;
   color: #fff;
   box-sizing: border-box;
+}
+
+@media screen and (min-width: 800px) {
+  .details {
+    grid-template-columns: minmax(75%, 3fr) 1fr;
+  }
 }

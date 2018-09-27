@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./TabbedHeader.css";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -58,6 +59,12 @@ class TabbedHeader extends Component {
     );
   }
 }
+
+TabbedHeader.propTypes = {
+  updateSearchTerm: PropTypes.func.isRequired,
+  clearSearchTerm: PropTypes.func.isRequired,
+  updateSearchBoxFocus: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   search: state.search

@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
+// import { Redirect } from "react-router-dom";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
 class PlayButton extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   handlePlayButtonClick = () => {
     // console.log(this.props.modal);
     // this.props.modalRef.current.style.display = "flex";
