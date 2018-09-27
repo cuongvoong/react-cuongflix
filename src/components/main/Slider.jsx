@@ -228,7 +228,7 @@ class Slider extends Component {
       index >= firstViewPortIndex &&
       index <= columnsInRow + firstViewPortIndex + 1
     )
-      return (index - firstViewPortIndex).toString();
+      return index - firstViewPortIndex;
 
     return "";
   };

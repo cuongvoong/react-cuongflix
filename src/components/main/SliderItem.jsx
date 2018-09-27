@@ -67,7 +67,10 @@ SliderItem.propTypes = {
   sliderItemId: PropTypes.string.isRequired,
   href: PropTypes.string.isRequired,
   additionalClasses: PropTypes.string.isRequired,
-  viewportIndex: PropTypes.string.isRequired,
+  viewportIndex: PropTypes.oneOfType([
+    PropTypes.number.isRequired,
+    PropTypes.string.isRequired
+  ]),
   viewportPosition: PropTypes.string.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired
