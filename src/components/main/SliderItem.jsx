@@ -64,10 +64,10 @@ class SliderItem extends Component {
 }
 
 SliderItem.propTypes = {
-  sliderItemId: PropTypes.number.isRequired,
+  sliderItemId: PropTypes.string.isRequired,
   href: PropTypes.string.isRequired,
   additionalClasses: PropTypes.string.isRequired,
-  viewportIndex: PropTypes.number.isRequired,
+  viewportIndex: PropTypes.string.isRequired,
   viewportPosition: PropTypes.string.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired

@@ -18,7 +18,7 @@ const Row = ({ href, results, columnsInRow, totalItems }) => {
 
 Row.propTypes = {
   href: PropTypes.string.isRequired,
-  results: PropTypes.object.isRequired,
+  results: PropTypes.array.isRequired,
   columnsInRow: PropTypes.number.isRequired,
   totalItems: PropTypes.number.isRequired
 };

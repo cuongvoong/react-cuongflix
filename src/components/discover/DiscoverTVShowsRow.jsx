@@ -19,7 +19,7 @@ const DiscoverTVShowsRow = ({ tvShows, columnsInRow, totalItems }) => {
 
 DiscoverTVShowsRow.propTypes = {
   tvShows: PropTypes.shape({
-    page: PropTypes.number.isRequired,
+    page: PropTypes.number,
     results: PropTypes.array.isRequired
   }),
   columnsInRow: PropTypes.number.isRequired,

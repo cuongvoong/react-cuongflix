@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./BillboardRow.css";
 import PlayButton from "./PlayButton";
-import TrailerModal from "./TrailerModal";
+// import TrailerModal from "./TrailerModal";
 
 class BillboardRow extends Component {
   constructor(props) {
@@ -29,12 +29,12 @@ class BillboardRow extends Component {
               src={`https://image.tmdb.org/t/p/w1280${billboard.backdrop_path}`}
               alt=""
             />
-            <TrailerModal
+            {/* <TrailerModal
               videos={billboard}
               modalContentRef={this.modalContentRef}
               modalRef={this.modalRef}
               youTubePlayerRef={this.youTubePlayerRef}
-            />
+            /> */}
             <div className="billboard-text-overlay info">
               <div className="logo-and-text">
                 <span className="billboard-title">{billboard.title}</span>

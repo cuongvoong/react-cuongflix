@@ -228,7 +228,7 @@ class Slider extends Component {
       index >= firstViewPortIndex &&
       index <= columnsInRow + firstViewPortIndex + 1
     )
-      return index - firstViewPortIndex;
+      return (index - firstViewPortIndex).toString();
 
     return "";
   };
@@ -291,7 +291,7 @@ class Slider extends Component {
 
 Slider.propTypes = {
   href: PropTypes.string.isRequired,
-  results: PropTypes.object.isRequired,
+  results: PropTypes.array.isRequired,
   columnsInRow: PropTypes.number.isRequired,
   totalItems: PropTypes.number.isRequired
 };

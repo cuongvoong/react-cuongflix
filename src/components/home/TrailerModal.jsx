@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import "./TrailerModal.css";
 import YouTube from "react-youtube";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -49,10 +48,5 @@ class TrailerModal extends Component {
     );
   }
 }
-
-TrailerModal.propTypes = {
-  modalRef: PropTypes.ref,
-  modalContentRef: PropTypes.ref
-};
 
 export default TrailerModal;
