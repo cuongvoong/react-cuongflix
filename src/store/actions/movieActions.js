@@ -3,7 +3,7 @@ import { FETCH_MOVIE_DETAILS, FETCH_MOVIE_CREDITS, SET_LOADING } from "./types";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const fetchMovieDetails = id => dispatch => {
-  const queryURL = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos`;
+  const queryURL = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos,release_dates`;
 
   fetch(queryURL)
     .then(response => response.json())

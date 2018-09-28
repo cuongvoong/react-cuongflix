@@ -20,7 +20,7 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      randomIndex: Math.floor(Math.random() * 20)
+      randomIndex: Math.floor(Math.random() * 40)
     };
   }
   componentDidMount() {

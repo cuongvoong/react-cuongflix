@@ -19,7 +19,10 @@ class BillboardRow extends Component {
 
   render() {
     const { discover, randomIndex } = this.props;
-    const billboard = discover.movies_page1.results[randomIndex];
+    const billboard =
+      randomIndex < 20
+        ? discover.movies_page1.results[randomIndex]
+        : discover.movies_page2.results[randomIndex - 20];
 
     return (
       <div className="billboard-row">

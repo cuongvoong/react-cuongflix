@@ -7,7 +7,7 @@ import {
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const fetchTVShowDetails = id => dispatch => {
-  const queryDetailsURL = `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&append_to_response=videos`;
+  const queryDetailsURL = `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&append_to_response=videos,release_dates`;
 
   fetch(queryDetailsURL)
     .then(response => response.json())

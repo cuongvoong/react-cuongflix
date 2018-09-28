@@ -85,6 +85,7 @@ class SearchBox extends Component {
             </span>
             <input
               ref={this.input}
+              className="searchBox-input"
               onChange={this.handleSearchInputChange.bind(this)}
               onBlur={this.handleSearchInputBlur.bind(this)}
               type="text"
@@ -120,11 +121,11 @@ class SearchBox extends Component {
 }
 
 SearchBox.propTypes = {
-  onSearchInputChange: PropTypes.func.isRequired,
-  onSearchBoxClose: PropTypes.func.isRequired,
-  onSearchBoxFocus: PropTypes.func.isRequired,
-  isSearchBoxFocused: PropTypes.bool.isRequired,
-  term: PropTypes.string.isRequired
+  onSearchInputChange: PropTypes.func,
+  onSearchBoxClose: PropTypes.func,
+  onSearchBoxFocus: PropTypes.func,
+  isSearchBoxFocused: PropTypes.bool,
+  term: PropTypes.string
 };
 
 export default SearchBox;

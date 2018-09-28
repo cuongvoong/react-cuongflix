@@ -8,7 +8,7 @@ const DiscoverTVShowsRow = ({ tvShows, columnsInRow, totalItems }) => {
     <React.Fragment>
       {tvShows.page === 1 && <RowHeader title="Discover TV Shows" />}
       <Row
-        href="/tvShow"
+        href="/tvshow"
         results={tvShows.results}
         columnsInRow={columnsInRow}
         totalItems={totalItems}

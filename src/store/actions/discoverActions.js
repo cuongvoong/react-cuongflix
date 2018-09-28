@@ -5,16 +5,17 @@ import {
 } from "./types";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
+const year = new Date().getFullYear();
 
 export const fetchDiscoverMovies = () => dispatch => {
   let movies_page1;
   let movies_page2;
 
-  const promise1 = fetchByPageNumber("movie", 1).then(results => {
+  const promise1 = fetchByPageNumber("movie", 1, year).then(results => {
     movies_page1 = results[0];
   });
 
-  const promise2 = fetchByPageNumber("movie", 2).then(results => {
+  const promise2 = fetchByPageNumber("movie", 2, year).then(results => {
     movies_page2 = results[0];
   });
 
@@ -29,11 +30,11 @@ export const fetchDiscoverMovies = () => dispatch => {
 export const fetchDiscoverTVShows = () => dispatch => {
   let tvShows_page1;
   let tvShows_page2;
-  const promise1 = fetchByPageNumber("tv", 1).then(results => {
+  const promise1 = fetchByPageNumber("tv", 1, year).then(results => {
     tvShows_page1 = results[0];
   });
 
-  const promise2 = fetchByPageNumber("tv", 2).then(results => {
+  const promise2 = fetchByPageNumber("tv", 2, year).then(results => {
     tvShows_page2 = results[0];
   });
 
@@ -58,8 +59,19 @@ export const fetchBillboardVideos = id => dispatch => {
     });
 };
 
-const fetchByPageNumber = (type, page) => {
-  const queryURL = `https://api.themoviedb.org/3/discover/${type}?api_key=${API_KEY}&include_video=true&page=${page}`;
+const fetchByPageNumber = (type, page, year = null) => {
+  let appendYear = "";
+  if (year !== null) {
+    if (type === "movie") {
+      appendYear = `&primary_release_year=${year}`;
+    }
+    if (type === "tv") {
+      appendYear = `&first_air_date_year=${year}`;
+    }
+  }
+
+  const queryURL = `https://api.themoviedb.org/3/discover/${type}?api_key=${API_KEY}&include_video=true&page=${page}${appendYear}`;
+  console.log(queryURL);
 
   const promise = fetch(queryURL).then(response => response.json());
 
