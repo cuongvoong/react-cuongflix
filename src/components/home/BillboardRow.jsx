@@ -1,83 +1,66 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./BillboardRow.css";
-import PlayButton from "./PlayButton";
-// import TrailerModal from "./TrailerModal";
+import ViewDetailsButton from "./ViewDetailsButton";
+import PlayTrailerButton from "./PlayTrailerButton";
+import BackDrop from "./BackDrop";
 
 class BillboardRow extends Component {
-  constructor(props) {
-    super(props);
-
-    this.modalRef = React.createRef();
-    this.modalContentRef = React.createRef();
-    this.youTubePlayerRef = React.createRef();
-  }
-
   billboardText = text => {
-    return text.length > 500 ? `${text.substr(0, 500)} ...` : text;
+    return text !== undefined && text.length > 500
+      ? `${text.substr(0, 500)} ...`
+      : text;
   };
 
   render() {
-    const { discover, randomIndex } = this.props;
-    const billboard =
-      randomIndex < 20
-        ? discover.movies_page1.results[randomIndex]
-        : discover.movies_page2.results[randomIndex - 20];
+    const {
+      onPlayTrailerClick,
+      modalRef,
+      modalContentRef,
+      billboardMovie
+    } = this.props;
 
     return (
       <div className="billboard-row">
-        {billboard && (
-          <React.Fragment>
-            <img
-              src={`https://image.tmdb.org/t/p/w1280${billboard.backdrop_path}`}
-              alt=""
-            />
-            {/* <TrailerModal
-              videos={billboard}
-              modalContentRef={this.modalContentRef}
-              modalRef={this.modalRef}
-              youTubePlayerRef={this.youTubePlayerRef}
-            /> */}
-            <div className="billboard-text-overlay info">
-              <div className="logo-and-text">
-                <span className="billboard-title">{billboard.title}</span>
-                <div className="billboard-links button-layer">
-                  <PlayButton
-                    id={billboard.id}
-                    modalRef={this.modalRef}
-                    modalContentRef={this.modalContentRef}
-                    youTubePlayerRef={this.youTubePlayerRef}
-                  />
-                </div>
+        <BackDrop backdrop_path={billboardMovie.backdrop_path} />
+        <div className="billboard-text-overlay info">
+          <div className="logo-and-text">
+            <span className="billboard-title">{billboardMovie.title}</span>
+            <div className="billboard-links button-layer">
+              <ViewDetailsButton id={billboardMovie.id} />
 
-                <p className="billboard-overview">
-                  {this.billboardText(billboard.overview)}
-                </p>
-              </div>
+              <PlayTrailerButton
+                modalRef={modalRef}
+                modalContentRef={modalContentRef}
+                id={billboardMovie.id}
+                onPlayTrailerClick={onPlayTrailerClick}
+              />
             </div>
-          </React.Fragment>
-        )}
+
+            <p className="billboard-overview">
+              {this.billboardText(billboardMovie.overview)}
+            </p>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 BillboardRow.propTypes = {
-  discover: PropTypes.shape({
-    movies_page1: PropTypes.shape({
-      results: PropTypes.array.isRequired
-    }),
-    movies_page2: PropTypes.shape({
-      results: PropTypes.array.isRequired
-    }),
-    tvShows_page1: PropTypes.shape({
-      results: PropTypes.array.isRequired
-    }),
-    tvShows_page2: PropTypes.shape({
-      results: PropTypes.array.isRequired
-    })
+  movies_page1: PropTypes.shape({
+    results: PropTypes.array.isRequired
   }),
-  randomIndex: PropTypes.number.isRequired
+  movies_page2: PropTypes.shape({
+    results: PropTypes.array.isRequired
+  }),
+  tvShows_page1: PropTypes.shape({
+    results: PropTypes.array.isRequired
+  }),
+  tvShows_page2: PropTypes.shape({
+    results: PropTypes.array.isRequired
+  }),
+  billboardMovie: PropTypes.object.isRequired
 };
 
 export default BillboardRow;

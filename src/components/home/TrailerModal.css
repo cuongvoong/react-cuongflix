@@ -1,36 +1,44 @@
 .trailer-modal {
-  background-color: rgba(0, 0, 0, 1);
+  background-color: rgba(0, 0, 0, 0.8);
   width: 100%;
   height: 100%;
   display: none;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 30;
 }
 
-.trailer-modal .content {
-  width: 100px;
-  transition: 0.5s;
+.trailer-modal .modal-header {
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding-left: 1%;
 }
 
 .trailer-modal .close {
   background: #000;
   border: none;
   outline: none;
-  position: absolute;
-  top: 1%;
-  right: 20px;
   z-index: 10;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.trailer-modal .content {
+  width: 0px;
+  transition: 0.5s;
 }
 
 .trailer-modal .iframe-container {
   overflow: hidden;
   padding-top: 56.25%;
   position: relative;
+  background-color: #000;
 }
 
 .trailer-modal .iframe-container iframe {

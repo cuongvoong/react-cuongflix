@@ -15,7 +15,7 @@ export default (state = initialState, action) => {
         columnsInRow = 3;
       } else if (action.payload.width < 750) {
         columnsInRow = 3;
-      } else if (action.payload.width < 1000) {
+      } else if (action.payload.width < 950) {
         columnsInRow = 4;
       } else if (action.payload.width < 1300) {
         columnsInRow = 5;

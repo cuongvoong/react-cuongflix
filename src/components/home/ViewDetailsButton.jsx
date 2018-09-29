@@ -4,16 +4,9 @@ import React, { Component } from "react";
 // import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
 class PlayButton extends Component {
-  handlePlayButtonClick = () => {
-    // console.log(this.props.modal);
-    // this.props.modalRef.current.style.display = "flex";
-    // this.props.modalContentRef.current.style.width = "95%";
-    // <Redirect to={`/movie/${this.props.id}`} />;
-  };
-
   render() {
     return (
-      <a href={`/movie/${this.props.id}`} className="play-link">
+      <a href={`/movie/${this.props.id}`} className="details-link">
         <span
           onClick={() => this.handlePlayButtonClick()}
           className="icon-button flat-button"

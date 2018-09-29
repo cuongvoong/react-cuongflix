@@ -121,11 +121,11 @@ class SearchBox extends Component {
 }
 
 SearchBox.propTypes = {
-  onSearchInputChange: PropTypes.func,
-  onSearchBoxClose: PropTypes.func,
-  onSearchBoxFocus: PropTypes.func,
-  isSearchBoxFocused: PropTypes.bool,
-  term: PropTypes.string
+  onSearchInputChange: PropTypes.func.isRequired,
+  onSearchBoxClose: PropTypes.func.isRequired,
+  onSearchBoxFocus: PropTypes.func.isRequired,
+  isSearchBoxFocused: PropTypes.bool.isRequired,
+  term: PropTypes.string.isRequired
 };
 
 export default SearchBox;

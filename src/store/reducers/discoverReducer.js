@@ -17,7 +17,9 @@ const initialState = {
   tvShows_page2: {
     results: []
   },
-  videos: {}
+  videos: {
+    results: []
+  }
 };
 
 export default (state = initialState, action) => {

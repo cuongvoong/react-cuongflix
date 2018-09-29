@@ -70,8 +70,7 @@ const fetchByPageNumber = (type, page, year = null) => {
     }
   }
 
-  const queryURL = `https://api.themoviedb.org/3/discover/${type}?api_key=${API_KEY}&include_video=true&page=${page}${appendYear}`;
-  console.log(queryURL);
+  const queryURL = `https://api.themoviedb.org/3/discover/${type}?api_key=${API_KEY}&page=${page}${appendYear}`;
 
   const promise = fetch(queryURL).then(response => response.json());
 
