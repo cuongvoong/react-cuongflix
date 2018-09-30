@@ -9,9 +9,7 @@ const Billboard = ({
   tvShows_page1,
   tvShows_page2,
   billboardMovie,
-  onPlayTrailerClick,
-  modalRef,
-  modalContentRef
+  onPlayTrailerClick
 }) => {
   return (
     <div className="billboard">
@@ -22,8 +20,6 @@ const Billboard = ({
         tvShows_page2={tvShows_page2}
         billboardMovie={billboardMovie}
         onPlayTrailerClick={onPlayTrailerClick}
-        modalRef={modalRef}
-        modalContentRef={modalContentRef}
       />
     </div>
   );

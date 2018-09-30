@@ -28,7 +28,7 @@ class Home extends Component {
   state = {
     isLoading: true,
     billboardMovie: {},
-    randomIndex: Math.floor(Math.random() * 40)
+    randomIndex: Math.floor(Math.random() * 20)
   };
 
   componentDidMount() {
@@ -38,47 +38,43 @@ class Home extends Component {
     this.props.updateSearchBoxFocus(false);
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.discover !== this.props.discover &&
-      this.props.discover.movies_page1.results.length !== 0 &&
-      this.props.discover.movies_page2.results.length !== 0
-    ) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.discover.movies_page1 !== this.props.discover.movies_page1) {
       this.calculateRandomMovie();
       this.setState({ isLoading: false });
+    }
+
+    if (prevState.randomIndex !== this.state.randomIndex) {
+      this.calculateRandomMovie();
     }
   }
 
   calculateRandomMovie = () => {
-    const { movies_page1, movies_page2 } = this.props.discover;
+    const { movies_page1 } = this.props.discover;
 
     const { randomIndex } = this.state;
 
     if (this.isBackDropNull(randomIndex)) {
-      this.setState({ randomIndex: Math.floor(Math.random() * 40) });
-      this.calculateRandomMovie();
+      this.setState({ randomIndex: Math.floor(Math.random() * 20) });
     } else {
-      const billboardMovie =
-        randomIndex < 20
-          ? movies_page1.results[randomIndex]
-          : movies_page2.results[randomIndex - 20];
+      const billboardMovie = movies_page1.results[randomIndex];
       this.setState({ billboardMovie });
     }
   };
 
   isBackDropNull = randomIndex => {
-    const { movies_page1, movies_page2 } = this.props.discover;
+    const { movies_page1 } = this.props.discover;
 
-    const movie =
-      randomIndex < 20
-        ? movies_page1.results[randomIndex]
-        : movies_page2.results[randomIndex - 20];
+    const movie = movies_page1.results[randomIndex];
 
     return movie.backdrop_path === null;
   };
 
   handleOnPlayTrailerClick = id => {
     this.props.fetchBillboardVideos(id);
+
+    this.modalRef.current.style.display = "flex";
+    this.modalContentRef.current.style.width = "95%";
   };
 
   render() {
@@ -101,8 +97,6 @@ class Home extends Component {
                 tvShows_page2={tvShows_page2}
                 billboardMovie={this.state.billboardMovie}
                 onPlayTrailerClick={id => this.handleOnPlayTrailerClick(id)}
-                modalRef={this.modalRef}
-                modalContentRef={this.modalContentRef}
               />
 
               <TrailerModal

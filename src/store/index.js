@@ -11,6 +11,7 @@ const middleware = [
     ? [window.__REDUX_DEVTOOLS_EXTENSION__()]
     : [])
 ];
+
 // if (process.env.NODE_ENV !== "production") {
 //   middleware.push(createLogger());
 // }
