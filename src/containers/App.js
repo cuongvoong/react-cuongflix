@@ -13,6 +13,7 @@ import ScrollToTop from "./ScrollToTop";
 
 class App extends Component {
   componentDidMount() {
+    this.handleWindowResize();
     this.props.detectMobile();
     window.addEventListener("resize", this.handleWindowResize);
   }
