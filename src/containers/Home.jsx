@@ -20,15 +20,16 @@ class Home extends Component {
   constructor(props) {
     super(props);
 
-    this.modalRef = React.createRef();
-    this.modalContentRef = React.createRef();
+    // this.modalRef = React.createRef();
+    // this.modalContentRef = React.createRef();
     this.youTubePlayerRef = React.createRef();
   }
 
   state = {
     isLoading: true,
     billboardMovie: {},
-    randomIndex: Math.floor(Math.random() * 20)
+    randomIndex: Math.floor(Math.random() * 20),
+    showTrailerModal: false
   };
 
   componentDidMount() {
@@ -70,11 +71,28 @@ class Home extends Component {
     return movie.backdrop_path === null;
   };
 
+  calculateBillboardTrailer = () => {
+    const { videos } = this.props.discover;
+
+    const videoTrailers = videos.results.find(video => {
+      return video.type === "Trailer" && video.site === "YouTube";
+    })
+      ? videos.results.filter(
+          video => video.type === "Trailer" && video.site === "YouTube"
+        )
+      : videos.results.filter(video => video.site === "YouTube");
+
+    return videoTrailers.length > 0 ? videoTrailers[0] : null;
+  };
+
   handleOnPlayTrailerClick = id => {
     this.props.fetchBillboardVideos(id);
 
-    this.modalRef.current.style.display = "flex";
-    this.modalContentRef.current.style.width = "95%";
+    this.setState({ showTrailerModal: true });
+  };
+
+  handleOnCloseTrailerModal = () => {
+    this.setState({ showTrailerModal: false });
   };
 
   render() {
@@ -100,10 +118,10 @@ class Home extends Component {
               />
 
               <TrailerModal
-                videos={this.props.discover.videos}
-                modalContentRef={this.modalContentRef}
-                modalRef={this.modalRef}
+                trailer={this.calculateBillboardTrailer()}
+                showTrailerModal={this.state.showTrailerModal}
                 youTubePlayerRef={this.youTubePlayerRef}
+                onCloseTrailerModal={() => this.handleOnCloseTrailerModal()}
               />
             </React.Fragment>
           )}

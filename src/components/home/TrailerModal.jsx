@@ -6,64 +6,60 @@ import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 
 class TrailerModal extends Component {
   state = {
-    videoTrailers: []
+    trailerModalStyles: {
+      display: "none"
+    },
+    contentModalStyles: {
+      width: 0
+    }
   };
 
   componentDidUpdate(prevProps) {
-    if (prevProps.videos !== this.props.videos) {
-      const { videos } = this.props;
-
-      const videoTrailers = videos.results.find(video => {
-        return video.type === "Trailer" && video.site === "YouTube";
-      })
-        ? videos.results.filter(
-            video => video.type === "Trailer" && video.site === "YouTube"
-          )
-        : videos.results.filter(video => video.site === "YouTube");
-
-      this.setState({ videoTrailers });
+    if (
+      prevProps.showTrailerModal !== this.props.showTrailerModal &&
+      this.props.showTrailerModal
+    ) {
+      this.setState({
+        trailerModalStyles: { display: "flex" },
+        contentModalStyles: { width: "95%" }
+      });
     }
   }
 
-  componentWillUnmount() {
-    this.setState({ videoTrailers: [] });
-  }
-
-  handleClose = () => {
-    this.props.modalRef.current.style.display = "none";
-    this.props.modalContentRef.current.style.width = "0";
-    this.props.youTubePlayerRef.current.internalPlayer.pauseVideo();
-  };
-
-  handleMouseOver = () => {
-    this.props.youTubePlayerRef.current.internalPlayer.playVideo();
-  };
-
-  handleMouseOut = () => {
+  handleOnCloseTrailerModal = () => {
+    this.setState({
+      trailerModalStyles: { display: "none" },
+      contentModalStyles: { width: 0 }
+    });
+    this.props.onCloseTrailerModal();
     this.props.youTubePlayerRef.current.internalPlayer.pauseVideo();
   };
 
   render() {
+    const { youTubePlayerRef, trailer } = this.props;
+
     return (
-      <div ref={this.props.modalRef} className="trailer-modal">
-        <div ref={this.props.modalContentRef} className="content">
+      <div style={this.state.trailerModalStyles} className="trailer-modal">
+        <div style={this.state.contentModalStyles} className="content">
           <div className="modal-header">
             <span>Play Trailer</span>
-            <button onClick={() => this.handleClose()} className="close">
+            <button
+              onClick={() => this.handleOnCloseTrailerModal()}
+              className="close"
+            >
               <FontAwesomeIcon icon={faTimesCircle} size="2x" color="white" />
             </button>
           </div>
 
           <div className="iframe-container">
-            <div
-            // onMouseOver={this.handleMouseOver}
-            // onMouseOut={this.handleMouseOut}
-            >
-              {this.state.videoTrailers.length !== 0 && (
+            <div>
+              {trailer !== null && (
                 <YouTube
-                  ref={this.props.youTubePlayerRef}
-                  videoId={this.state.videoTrailers[0].key}
-                  opts={{ playerVars: { rel: 0 } }}
+                  ref={youTubePlayerRef}
+                  videoId={trailer.key}
+                  opts={{
+                    playerVars: { rel: 0 }
+                  }}
                 />
               )}
             </div>

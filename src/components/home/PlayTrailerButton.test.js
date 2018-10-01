@@ -6,12 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 describe("<PlayTrailerButton />", () => {
   it("should render <a>", () => {
     const wrapper = shallow(<PlayTrailerButton />);
-    expect(wrapper.find("a")).toHaveLength(1);
+    expect(wrapper.find("button")).toHaveLength(1);
   });
 
   it("should render <a> with .trailer-link", () => {
     const wrapper = shallow(<PlayTrailerButton />);
-    expect(wrapper.find("a").hasClass("trailer-link")).toEqual(true);
+    expect(wrapper.find("button").hasClass("trailer-link")).toEqual(true);
   });
 
   it("should render a 'Play' icon", () => {
