@@ -282,7 +282,7 @@ class Slider extends Component {
             onClick={() => this.advancePrev()}
             className="handle handlePrev"
           >
-            <FontAwesomeIcon icon={faChevronLeft} size="3x" />
+            <FontAwesomeIcon icon={faChevronLeft} />
           </span>
         )}
         <div className="slider">
@@ -295,7 +295,7 @@ class Slider extends Component {
           onClick={() => this.advanceNext()}
           className="handle handleNext active"
         >
-          <FontAwesomeIcon icon={faChevronRight} size="3x" />
+          <FontAwesomeIcon icon={faChevronRight} />
         </span>
       </div>
     );
