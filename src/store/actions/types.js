@@ -20,7 +20,7 @@ export const FETCH_TV_SHOW_DETAILS = "FETCH_TV_SHOW_DETAILS";
 export const FETCH_TV_SHOW_CREDITS = "FETCH_TV_SHOW_CREDITS";
 
 //Window actions
-export const UPDATE_WINDOW_STATE = "UPDATE_WINDOW_STATE";
+export const UPDATE_COLUMNS_IN_ROW = "UPDATE_COLUMNS_IN_ROW";
 export const DETECT_MOBILE = "DETECT_MOBILE";
 
 //Discover actions

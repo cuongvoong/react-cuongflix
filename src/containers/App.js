@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import store from "../store";
 import "./App.css";
 import {
-  updateWindowState,
+  updateColumnsInRow,
   detectMobile
 } from "../store/actions/windowActions";
 import CuongFlix from "./CuongFlix";
@@ -13,20 +13,36 @@ import ScrollToTop from "./ScrollToTop";
 
 class App extends Component {
   componentDidMount() {
-    this.updateWindowState();
+    // this.updateWindowState();
     this.props.detectMobile();
-    window.addEventListener("resize", this.updateWindowState);
+    window.addEventListener("resize", this.handleWindowResize);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateWindowState);
+    window.removeEventListener("resize", this.handleWindowResize);
   }
 
-  updateWindowState = () => {
-    this.props.updateWindowState({
-      width: window.innerWidth,
-      height: window.innerHeight
-    });
+  // updateWindowState = () => {
+
+  //   this.props.updateWindowState({
+  //     width: window.innerWidth,
+  //     height: window.innerHeight
+  //   });
+  // };
+
+  handleWindowResize = () => {
+    let columnsInRow;
+    if (window.innerWidth < 750) {
+      columnsInRow = 3;
+    } else if (window.innerWidth < 950) {
+      columnsInRow = 4;
+    } else if (window.innerWidth < 1300) {
+      columnsInRow = 5;
+    } else {
+      columnsInRow = 6;
+    }
+
+    this.props.updateColumnsInRow(columnsInRow);
   };
 
   render() {
@@ -45,7 +61,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  updateWindowState: PropTypes.func.isRequired,
+  updateColumnsInRow: PropTypes.func.isRequired,
   detectMobile: PropTypes.func.isRequired
 };
 
@@ -55,5 +71,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { updateWindowState, detectMobile }
+  { updateColumnsInRow, detectMobile }
 )(App);

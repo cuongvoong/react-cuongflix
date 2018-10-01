@@ -21,6 +21,17 @@ class Slider extends Component {
     lowestVisibleItemIndex: 0
   };
 
+  componentDidUpdate(prevProps) {
+    const { columnsInRow } = this.props;
+
+    if (prevProps.columnsInRow !== columnsInRow) {
+      if (this.state.hasMovedOnce) {
+        const translatePercentEnd = 100 + 100 / columnsInRow;
+        this.sliderContent.current.style.transform = `translate3d(-${translatePercentEnd}%,0,0)`;
+      }
+    }
+  }
+
   componentWillUnmount() {
     clearTimeout(this.sliderAnimation);
   }
@@ -156,6 +167,8 @@ class Slider extends Component {
       });
     }
   };
+
+  setLowestVisibleIndex = () => {};
 
   generateSliderItemsToRender() {
     const { href, results, columnsInRow, totalItems } = this.props;
