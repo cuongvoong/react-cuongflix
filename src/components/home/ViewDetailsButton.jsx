@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const Viewdetails = ({ id }) => {
+const ViewDetailsButton = ({ id }) => {
   return (
     <a href={`/movie/${id}`} className="details-link">
       <span className="icon-button flat-button">
@@ -10,4 +11,8 @@ const Viewdetails = ({ id }) => {
   );
 };
 
-export default Viewdetails;
+ViewDetailsButton.propTypes = {
+  id: PropTypes.number
+};
+
+export default ViewDetailsButton;

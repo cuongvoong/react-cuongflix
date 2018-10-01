@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
@@ -11,6 +12,11 @@ const PlayTrailerButton = ({ onPlayTrailerClick, id }) => {
       </span>
     </button>
   );
+};
+
+PlayTrailerButton.propTypes = {
+  onPlayTrailerClick: PropTypes.func.isRequired,
+  id: PropTypes.number
 };
 
 export default PlayTrailerButton;

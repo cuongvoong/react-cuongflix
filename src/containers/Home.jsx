@@ -20,8 +20,6 @@ class Home extends Component {
   constructor(props) {
     super(props);
 
-    // this.modalRef = React.createRef();
-    // this.modalContentRef = React.createRef();
     this.youTubePlayerRef = React.createRef();
   }
 
