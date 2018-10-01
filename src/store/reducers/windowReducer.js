@@ -1,8 +1,6 @@
 import { UPDATE_COLUMNS_IN_ROW, DETECT_MOBILE } from "../actions/types";
 
 const initialState = {
-  // width: 0,
-  // height: 0,
   columnsInRow: 3,
   isMobile: false
 };

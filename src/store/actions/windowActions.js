@@ -1,13 +1,5 @@
 import { UPDATE_COLUMNS_IN_ROW, DETECT_MOBILE } from "./types";
 
-// export const updateWindowState = window => dispatch => {
-
-//   dispatch({
-//     type: UPDATE_WINDOW_STATE,
-//     payload: window
-//   });
-// };
-
 export const updateColumnsInRow = columnsinRow => dispatch => {
   dispatch({
     type: UPDATE_COLUMNS_IN_ROW,

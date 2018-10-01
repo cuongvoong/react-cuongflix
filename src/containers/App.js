@@ -13,7 +13,6 @@ import ScrollToTop from "./ScrollToTop";
 
 class App extends Component {
   componentDidMount() {
-    // this.updateWindowState();
     this.props.detectMobile();
     window.addEventListener("resize", this.handleWindowResize);
   }
@@ -21,14 +20,6 @@ class App extends Component {
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleWindowResize);
   }
-
-  // updateWindowState = () => {
-
-  //   this.props.updateWindowState({
-  //     width: window.innerWidth,
-  //     height: window.innerHeight
-  //   });
-  // };
 
   handleWindowResize = () => {
     let columnsInRow;
