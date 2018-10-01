@@ -26,3 +26,9 @@
 .main-header .tabbed-primary-navigation .navigation-tab a:hover {
   color: #b3b3b3;
 }
+
+.main-header .tabbed-primary-navigation .navigation-tab a.current {
+  color: #fff;
+  font-weight: 700;
+  cursor: default;
+}

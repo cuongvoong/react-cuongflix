@@ -1,22 +1,31 @@
 import React from "react";
 import "./PrimaryNavigation.css";
+import { withRouter } from "react-router-dom";
 import MainViewLink from "./MainViewLink";
 
-const PrimaryNavigation = () => {
+const PrimaryNavigation = props => {
+  const { pathname } = props.location;
+
   return (
     <ul className="tabbed-primary-navigation">
       <li className="navigation-tab">
-        <MainViewLink href="/" className="">
+        <MainViewLink href="/" className={pathname === "/" ? "current" : ""}>
           Home
         </MainViewLink>
       </li>
       <li className="navigation-tab">
-        <MainViewLink href="/tvshows" className="">
+        <MainViewLink
+          href="/tvshows"
+          className={pathname === "/tvshows" ? "current" : ""}
+        >
           TV Shows
         </MainViewLink>
       </li>
       <li className="navigation-tab">
-        <MainViewLink href="/movies" className="">
+        <MainViewLink
+          href="/movies"
+          className={pathname === "/movies" ? "current" : ""}
+        >
           Movies
         </MainViewLink>
       </li>
@@ -24,4 +33,4 @@ const PrimaryNavigation = () => {
   );
 };
 
-export default PrimaryNavigation;
+export default withRouter(PrimaryNavigation);
