@@ -13,6 +13,9 @@ class Slider extends Component {
     super(props);
     this.sliderContent = React.createRef();
     this.sliderAnimation = null;
+
+    this.chevronLeft = React.createRef();
+    this.chevronRight = React.createRef();
   }
 
   state = {
@@ -270,6 +273,20 @@ class Slider extends Component {
     return "";
   };
 
+  handleSliderMouseEnter = () => {
+    this.chevronRight.current.style.visibility = "visible";
+    if (this.state.hasMovedOnce) {
+      this.chevronLeft.current.style.visibility = "visible";
+    }
+  };
+
+  handleSliderMouseLeave = () => {
+    this.chevronRight.current.style.visibility = "hidden";
+    if (this.state.hasMovedOnce) {
+      this.chevronLeft.current.style.visibility = "hidden";
+    }
+  };
+
   render() {
     const sliderContentClasses =
       "sliderContent" + (this.state.animating ? " animating" : "");
@@ -278,24 +295,35 @@ class Slider extends Component {
       <div className="slider-container">
         {this.state.hasMovedOnce && (
           <span
-            ref={this.leftHandle}
+            onMouseEnter={() => this.handleSliderMouseEnter()}
+            onMouseLeave={() => this.handleSliderMouseLeave()}
             onClick={() => this.advancePrev()}
             className="handle handlePrev"
           >
-            <FontAwesomeIcon icon={faChevronLeft} />
+            <span style={{ visibility: "hidden" }} ref={this.chevronLeft}>
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </span>
           </span>
         )}
         <div className="slider">
-          <div className={sliderContentClasses} ref={this.sliderContent}>
+          <div
+            className={sliderContentClasses}
+            ref={this.sliderContent}
+            onMouseEnter={() => this.handleSliderMouseEnter()}
+            onMouseLeave={() => this.handleSliderMouseLeave()}
+          >
             {this.generateSliderItemsToRender()}
           </div>
         </div>
         <span
-          ref={this.rightHandle}
+          onMouseEnter={() => this.handleSliderMouseEnter()}
+          onMouseLeave={() => this.handleSliderMouseLeave()}
           onClick={() => this.advanceNext()}
           className="handle handleNext active"
         >
-          <FontAwesomeIcon icon={faChevronRight} />
+          <span style={{ visibility: "hidden" }} ref={this.chevronRight}>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </span>
         </span>
       </div>
     );
