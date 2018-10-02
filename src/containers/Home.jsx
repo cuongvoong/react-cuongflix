@@ -83,10 +83,12 @@ class Home extends Component {
     return videoTrailers.length > 0 ? videoTrailers[0] : null;
   };
 
-  handleOnPlayTrailerClick = id => {
-    this.props.fetchBillboardVideos(id);
-
+  handleOnPlayTrailerClick = () => {
     this.setState({ showTrailerModal: true });
+  };
+
+  handleOnFetchMovieTrailer = id => {
+    this.props.fetchBillboardVideos(id);
   };
 
   handleOnCloseTrailerModal = () => {
@@ -112,14 +114,16 @@ class Home extends Component {
                 tvShows_page1={tvShows_page1}
                 tvShows_page2={tvShows_page2}
                 billboardMovie={this.state.billboardMovie}
-                onPlayTrailerClick={id => this.handleOnPlayTrailerClick(id)}
+                onPlayTrailerClick={() => this.handleOnPlayTrailerClick()}
               />
 
               <TrailerModal
                 trailer={this.calculateBillboardTrailer()}
+                billboardMovie={this.state.billboardMovie}
                 showTrailerModal={this.state.showTrailerModal}
                 youTubePlayerRef={this.youTubePlayerRef}
                 onCloseTrailerModal={() => this.handleOnCloseTrailerModal()}
+                onFetchMovieTrailer={id => this.handleOnFetchMovieTrailer(id)}
               />
             </React.Fragment>
           )}

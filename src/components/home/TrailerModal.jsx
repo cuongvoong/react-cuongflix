@@ -1,18 +1,21 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import "./TrailerModal.css";
 import YouTube from "react-youtube";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
+import { ClipLoader } from "react-spinners";
 
-class TrailerModal extends Component {
+class TrailerModal extends PureComponent {
   state = {
     trailerModalStyles: {
       display: "none"
     },
     contentModalStyles: {
       width: 0
-    }
+    },
+    trailer: null,
+    isLoading: true
   };
 
   componentDidUpdate(prevProps) {
@@ -20,11 +23,26 @@ class TrailerModal extends Component {
       prevProps.showTrailerModal !== this.props.showTrailerModal &&
       this.props.showTrailerModal
     ) {
+      if (this.props.youTubePlayerRef.current === null) {
+        this.props.onFetchMovieTrailer(this.props.billboardMovie.id);
+      }
+
       this.setState({
         trailerModalStyles: { display: "flex" },
         contentModalStyles: { width: "90%" }
       });
     }
+
+    if (prevProps.trailer !== this.props.trailer) {
+      this.setState({
+        trailer: this.props.trailer,
+        isLoading: false
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    this.setState({ trailer: null });
   }
 
   handleOnCloseTrailerModal = () => {
@@ -53,8 +71,9 @@ class TrailerModal extends Component {
           </div>
 
           <div className="iframe-container">
-            <div>
-              {trailer !== null && (
+            <ClipLoader color={"#fff"} loading={this.state.isLoading} />
+            {!this.state.isLoading &&
+              this.state.trailer !== null && (
                 <YouTube
                   ref={youTubePlayerRef}
                   videoId={trailer.key}
@@ -63,7 +82,6 @@ class TrailerModal extends Component {
                   }}
                 />
               )}
-            </div>
           </div>
         </div>
       </div>
@@ -74,7 +92,9 @@ class TrailerModal extends Component {
 TrailerModal.propTypes = {
   trailer: PropTypes.object,
   onCloseTrailerModal: PropTypes.func.isRequired,
-  showTrailerModal: PropTypes.bool.isRequired
+  onFetchMovieTrailer: PropTypes.func.isRequired,
+  showTrailerModal: PropTypes.bool.isRequired,
+  billboardMovie: PropTypes.object.isRequired
 };
 
 export default TrailerModal;
