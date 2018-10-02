@@ -22,7 +22,7 @@ class TrailerModal extends Component {
     ) {
       this.setState({
         trailerModalStyles: { display: "flex" },
-        contentModalStyles: { width: "95%" }
+        contentModalStyles: { width: "90%" }
       });
     }
   }

@@ -4,7 +4,7 @@ A React Netflix-like user interface for [TheMovieDB](https://www.themoviedb.org)
 
 ## Live Demo
 
-(https://cuongflix.herokuapp.com/)
+https://cuongflix.herokuapp.com/
 
 ## Setup
 
@@ -20,7 +20,7 @@ Start the server on localhost:
 npm start
 ```
 
-Project will be automatically open at (http://localhost.com:3000)
+Project will open automatically at (http://localhost.com:3000)
 
 For production build:
 
