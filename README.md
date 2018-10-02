@@ -2,6 +2,8 @@
 
 A React Netflix-like user interface for [TheMovieDB](https://www.themoviedb.org) using Redux.
 
+https://github.com/cuongvoong/react-cuongflix/blob/master/demo.gif
+
 ## Live Demo
 
 https://cuongflix.herokuapp.com/
