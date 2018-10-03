@@ -19,24 +19,24 @@ class TVShow extends Component {
   }
 
   render() {
-    const { isLoading, details, credits } = this.props.tvShow;
+    const { details, credits } = this.props.tvShow;
     return (
       <div className="mainView">
-        {details.status_message ? (
-          <Redirect to="/error" />
-        ) : (
-          <section className="tvshow">
+        {details.status_message && <Redirect to="/error" />}
+
+        <section className="tvshow">
+          {!details.isFetching && (
             <section className="poster-trailer-row">
               <Poster details={details} />
-              <Trailer trailers={details.videos} isLoading={isLoading} />
+              <Trailer trailers={details.videos} />
             </section>
-            <Details
-              details={details}
-              credits={credits}
-              isLoading={isLoading}
-            />
-          </section>
-        )}
+          )}
+
+          {!details.isFetching &&
+            !credits.isFetching && (
+              <Details details={details} credits={credits} />
+            )}
+        </section>
       </div>
     );
   }
@@ -51,7 +51,6 @@ TVShow.propTypes = {
     })
   }),
   tvShow: PropTypes.shape({
-    isLoading: PropTypes.bool.isRequired,
     details: PropTypes.object.isRequired,
     credits: PropTypes.object.isRequired
   })

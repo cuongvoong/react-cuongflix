@@ -13,7 +13,7 @@ const DetailsInfo = ({ details, credits }) => {
         <h3 className="title">{details.title || details.name}</h3>
         <div className="rating">
           <div className="rating-star">
-            <FontAwesomeIcon icon={faStar} size="2x" />
+            <FontAwesomeIcon icon={faStar} />
           </div>{" "}
           <div>
             <span className="rating-text">

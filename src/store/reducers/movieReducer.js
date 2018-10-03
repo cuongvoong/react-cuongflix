@@ -1,7 +1,8 @@
 import {
   FETCH_MOVIE_DETAILS,
   FETCH_MOVIE_CREDITS,
-  SET_LOADING
+  RECEIVE_MOVIE_DETAILS,
+  RECEIVE_MOVIE_CREDITS
 } from "../actions/types";
 
 const initialState = {
@@ -9,12 +10,13 @@ const initialState = {
     genres: [],
     videos: {
       results: []
-    }
+    },
+    isFetching: true
   },
   credits: {
-    cast: []
-  },
-  isLoading: true
+    cast: [],
+    isFetching: true
+  }
 };
 
 export default (state = initialState, action) => {
@@ -22,17 +24,39 @@ export default (state = initialState, action) => {
     case FETCH_MOVIE_DETAILS:
       return {
         ...state,
-        details: action.payload
+        details: {
+          ...state.details,
+          isFetching: action.payload.isFetching
+        }
       };
+
+    case RECEIVE_MOVIE_DETAILS:
+      return {
+        ...state,
+        details: {
+          ...state.details,
+          isFetching: false,
+          ...action.payload
+        }
+      };
+
     case FETCH_MOVIE_CREDITS:
       return {
         ...state,
-        credits: action.payload
+        credits: {
+          ...state.credits,
+          isFetching: action.payload.isFetching
+        }
       };
-    case SET_LOADING:
+
+    case RECEIVE_MOVIE_CREDITS:
       return {
         ...state,
-        isLoading: action.payload
+        credits: {
+          ...state.credits,
+          isFetching: false,
+          ...action.payload
+        }
       };
     default:
       return state;
