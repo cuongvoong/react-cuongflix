@@ -6,7 +6,6 @@ import {
   ASSIGN_BILLBOARD_MOVIE,
   FETCH_BILLBOARD_MOVIE_VIDEOS,
   RECEIVE_BILLBOARD_MOVIE_VIDEOS,
-  GENERATE_RANDOM_INDEX,
   SHOW_TRAILER_MODAL
 } from "../actions/types";
 
@@ -141,11 +140,6 @@ export default (state = initialState, action) => {
             isFetching: action.payload.isFetching
           }
         }
-      };
-    case GENERATE_RANDOM_INDEX:
-      return {
-        ...state,
-        randomIndex: action.payload
       };
     case SHOW_TRAILER_MODAL:
       return {

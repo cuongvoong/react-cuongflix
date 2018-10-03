@@ -9,7 +9,6 @@ import {
   fetchDiscoverTVShows,
   assignBillboardMovie,
   fetchBillboardMovieVideos,
-  generateRandomIndex,
   showTrailerModal
 } from "../store/actions/discoverActions";
 import DiscoverMoviesRow from "../components/discover/DiscoverMoviesRow";
@@ -29,7 +28,6 @@ class Home extends Component {
   componentDidMount() {
     this.props.fetchDiscoverMovies();
     this.props.fetchDiscoverTVShows();
-    this.props.generateRandomIndex();
     this.props.clearSearchTerm();
     this.props.updateSearchBoxFocus(false);
   }
@@ -54,7 +52,6 @@ class Home extends Component {
     const { movies_page1, movies_page2 } = this.props.discover;
 
     const randomIndex = Math.floor(Math.random() * 40);
-    // const randomIndex = 7;
 
     const movies = randomIndex < 20 ? movies_page1 : movies_page2;
 
@@ -186,7 +183,6 @@ export default connect(
     fetchDiscoverTVShows,
     assignBillboardMovie,
     fetchBillboardMovieVideos,
-    generateRandomIndex,
     showTrailerModal,
     clearSearchTerm,
     updateSearchBoxFocus

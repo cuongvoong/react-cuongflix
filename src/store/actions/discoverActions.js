@@ -6,7 +6,6 @@ import {
   ASSIGN_BILLBOARD_MOVIE,
   FETCH_BILLBOARD_MOVIE_VIDEOS,
   RECEIVE_BILLBOARD_MOVIE_VIDEOS,
-  GENERATE_RANDOM_INDEX,
   SHOW_TRAILER_MODAL
 } from "./types";
 
@@ -110,13 +109,6 @@ const fetchByPageNumber = (type, page, year = null) => {
   const promise = fetch(queryURL).then(response => response.json());
 
   return Promise.all([promise]);
-};
-
-export const generateRandomIndex = () => dispatch => {
-  dispatch({
-    type: GENERATE_RANDOM_INDEX,
-    payload: Math.floor(Math.random() * 40)
-  });
 };
 
 export const showTrailerModal = show => dispatch => {
