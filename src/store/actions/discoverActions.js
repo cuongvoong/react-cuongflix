@@ -115,7 +115,7 @@ const fetchByPageNumber = (type, page, year = null) => {
 export const generateRandomIndex = () => dispatch => {
   dispatch({
     type: GENERATE_RANDOM_INDEX,
-    payload: Math.floor(Math.random() * 20)
+    payload: Math.floor(Math.random() * 40)
   });
 };
 

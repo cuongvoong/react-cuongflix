@@ -20,6 +20,16 @@
   padding-left: 1%;
 }
 
+.trailer-modal .loader {
+  display: flex;
+  background: #000;
+  justify-content: center;
+  padding-top: 26.5%;
+  padding-bottom: 26.5%;
+  box-sizing: border-box;
+  color: #fff;
+}
+
 .trailer-modal .close {
   background: #000;
   border: none;
@@ -39,9 +49,6 @@
   padding-top: 56.25%;
   position: relative;
   background-color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .trailer-modal .iframe-container iframe {

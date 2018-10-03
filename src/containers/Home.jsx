@@ -37,30 +37,38 @@ class Home extends Component {
   componentDidUpdate(prevProps) {
     if (
       prevProps.discover.movies_page1.isFetching !==
-      this.props.discover.movies_page1.isFetching
+        this.props.discover.movies_page1.isFetching ||
+      prevProps.discover.movies_page2.isFetching !==
+        this.props.discover.movies_page2.isFetching
     ) {
-      if (!this.props.discover.movies_page1.isFetching) {
+      if (
+        !this.props.discover.movies_page1.isFetching &&
+        !this.props.discover.movies_page2.isFetching
+      ) {
         this.calculateRandomMovie();
       }
     }
   }
 
   calculateRandomMovie = () => {
-    const { movies_page1, randomIndex } = this.props.discover;
+    const { movies_page1, movies_page2 } = this.props.discover;
 
-    if (this.isBackDropNull()) {
-      this.props.generateRandomIndex();
+    const randomIndex = Math.floor(Math.random() * 40);
+    // const randomIndex = 7;
+
+    const movies = randomIndex < 20 ? movies_page1 : movies_page2;
+
+    if (this.isBackDropNull(movies, randomIndex)) {
       this.calculateRandomMovie();
     } else {
-      this.props.assignBillboardMovie(movies_page1.results[randomIndex]);
+      const index = randomIndex < 20 ? randomIndex : randomIndex - 20;
+      this.props.assignBillboardMovie(movies.results[index]);
     }
   };
 
-  isBackDropNull = () => {
-    const { movies_page1, randomIndex } = this.props.discover;
-
-    const movie = movies_page1.results[randomIndex];
-
+  isBackDropNull = (movies, randomIndex) => {
+    const index = randomIndex < 20 ? randomIndex : randomIndex - 20;
+    const movie = movies.results[index];
     return movie.backdrop_path === null;
   };
 
@@ -115,6 +123,7 @@ class Home extends Component {
 
               <TrailerModal
                 trailer={this.calculateBillboardTrailer()}
+                isFetching={billboardMovie.videos.isFetching}
                 billboardMovie={billboardMovie}
                 showTrailerModal={showTrailerModal}
                 youTubePlayerRef={this.youTubePlayerRef}

@@ -46,7 +46,9 @@ class TrailerModal extends PureComponent {
     this.modalRef.current.style.display = "none";
     this.modalContentRef.current.style.width = "0";
     this.props.onCloseTrailerModal();
-    this.props.youTubePlayerRef.current.internalPlayer.pauseVideo();
+    if (this.props.youTubePlayerRef.current !== null) {
+      this.props.youTubePlayerRef.current.internalPlayer.pauseVideo();
+    }
   };
 
   render() {
@@ -72,11 +74,14 @@ class TrailerModal extends PureComponent {
               <FontAwesomeIcon icon={faTimesCircle} size="2x" color="white" />
             </button>
           </div>
-
-          <div className="iframe-container">
-            <ClipLoader color={"#fff"} loading={this.props.isFetching} />
-            {!this.props.isFetching &&
-              this.state.trailer !== null && (
+          {this.props.isFetching && (
+            <div className="loader">
+              <ClipLoader color={"#fff"} loading={this.props.isFetching} />
+            </div>
+          )}
+          {!this.props.isFetching &&
+            this.state.trailer !== null && (
+              <div className="iframe-container">
                 <YouTube
                   ref={youTubePlayerRef}
                   videoId={trailer.key}
@@ -84,8 +89,15 @@ class TrailerModal extends PureComponent {
                     playerVars: { rel: 0 }
                   }}
                 />
-              )}
-          </div>
+              </div>
+            )}
+
+          {!this.props.isFetching &&
+            this.state.trailer === null && (
+              <div className="loader">
+                There are no trailers for this movie!
+              </div>
+            )}
         </div>
       </div>
     );
