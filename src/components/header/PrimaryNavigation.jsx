@@ -6,6 +6,8 @@ import MainViewLink from "./MainViewLink";
 const PrimaryNavigation = props => {
   const { pathname } = props.location;
 
+  const { isMobile } = props;
+
   return (
     <ul className="tabbed-primary-navigation">
       <li className="navigation-tab">

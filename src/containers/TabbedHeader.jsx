@@ -53,6 +53,7 @@ class TabbedHeader extends Component {
           onSearchBoxFocus={this.handleSearchBoxFocus}
           term={this.props.search.term}
           isSearchBoxFocused={this.props.search.isSearchBoxFocused}
+          isMobile={this.props.window.isMobile}
         />
         <SubHeader />
       </div>
@@ -67,7 +68,8 @@ TabbedHeader.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  search: state.search
+  search: state.search,
+  window: state.window
 });
 
 export default withRouter(

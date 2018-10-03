@@ -17,10 +17,7 @@ const BillboardOverlay = ({ billboardMovie, onPlayTrailerClick }) => {
         <div className="billboard-links button-layer">
           <ViewDetailsButton id={billboardMovie.id} />
 
-          <PlayTrailerButton
-            id={billboardMovie.id}
-            onPlayTrailerClick={onPlayTrailerClick}
-          />
+          <PlayTrailerButton onPlayTrailerClick={onPlayTrailerClick} />
         </div>
 
         <p className="billboard-overview">

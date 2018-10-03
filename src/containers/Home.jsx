@@ -7,7 +7,10 @@ import { connect } from "react-redux";
 import {
   fetchDiscoverMovies,
   fetchDiscoverTVShows,
-  fetchBillboardVideos
+  assignBillboardMovie,
+  fetchBillboardMovieVideos,
+  generateRandomIndex,
+  showTrailerModal
 } from "../store/actions/discoverActions";
 import DiscoverMoviesRow from "../components/discover/DiscoverMoviesRow";
 import DiscoverTVShowsRow from "../components/discover/DiscoverTVShowsRow";
@@ -23,46 +26,38 @@ class Home extends Component {
     this.youTubePlayerRef = React.createRef();
   }
 
-  state = {
-    isLoading: true,
-    billboardMovie: {},
-    randomIndex: Math.floor(Math.random() * 20),
-    showTrailerModal: false
-  };
-
   componentDidMount() {
     this.props.fetchDiscoverMovies();
     this.props.fetchDiscoverTVShows();
+    this.props.generateRandomIndex();
     this.props.clearSearchTerm();
     this.props.updateSearchBoxFocus(false);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.discover.movies_page1 !== this.props.discover.movies_page1) {
-      this.calculateRandomMovie();
-      this.setState({ isLoading: false });
-    }
-
-    if (prevState.randomIndex !== this.state.randomIndex) {
-      this.calculateRandomMovie();
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.discover.movies_page1.isFetching !==
+      this.props.discover.movies_page1.isFetching
+    ) {
+      if (!this.props.discover.movies_page1.isFetching) {
+        this.calculateRandomMovie();
+      }
     }
   }
 
   calculateRandomMovie = () => {
-    const { movies_page1 } = this.props.discover;
+    const { movies_page1, randomIndex } = this.props.discover;
 
-    const { randomIndex } = this.state;
-
-    if (this.isBackDropNull(randomIndex)) {
-      this.setState({ randomIndex: Math.floor(Math.random() * 20) });
+    if (this.isBackDropNull()) {
+      this.props.generateRandomIndex();
+      this.calculateRandomMovie();
     } else {
-      const billboardMovie = movies_page1.results[randomIndex];
-      this.setState({ billboardMovie });
+      this.props.assignBillboardMovie(movies_page1.results[randomIndex]);
     }
   };
 
-  isBackDropNull = randomIndex => {
-    const { movies_page1 } = this.props.discover;
+  isBackDropNull = () => {
+    const { movies_page1, randomIndex } = this.props.discover;
 
     const movie = movies_page1.results[randomIndex];
 
@@ -70,7 +65,7 @@ class Home extends Component {
   };
 
   calculateBillboardTrailer = () => {
-    const { videos } = this.props.discover;
+    const { videos } = this.props.discover.billboardMovie;
 
     const videoTrailers = videos.results.find(video => {
       return video.type === "Trailer" && video.site === "YouTube";
@@ -84,15 +79,15 @@ class Home extends Component {
   };
 
   handleOnPlayTrailerClick = () => {
-    this.setState({ showTrailerModal: true });
+    this.props.showTrailerModal(true);
   };
 
   handleOnFetchMovieTrailer = id => {
-    this.props.fetchBillboardVideos(id);
+    this.props.fetchBillboardMovieVideos(id);
   };
 
   handleOnCloseTrailerModal = () => {
-    this.setState({ showTrailerModal: false });
+    this.props.showTrailerModal(false);
   };
 
   render() {
@@ -100,27 +95,28 @@ class Home extends Component {
       movies_page1,
       movies_page2,
       tvShows_page1,
-      tvShows_page2
+      tvShows_page2,
+      billboardMovie,
+      showTrailerModal
     } = this.props.discover;
 
     return (
       <div className="mainView">
-        {!this.state.isLoading &&
+        {!movies_page1.isFetching &&
+          !movies_page2.isFetching &&
           !this.props.window.isMobile && (
             <React.Fragment>
               <Billboard
                 movies_page1={movies_page1}
                 movies_page2={movies_page2}
-                tvShows_page1={tvShows_page1}
-                tvShows_page2={tvShows_page2}
-                billboardMovie={this.state.billboardMovie}
+                billboardMovie={billboardMovie}
                 onPlayTrailerClick={() => this.handleOnPlayTrailerClick()}
               />
 
               <TrailerModal
                 trailer={this.calculateBillboardTrailer()}
-                billboardMovie={this.state.billboardMovie}
-                showTrailerModal={this.state.showTrailerModal}
+                billboardMovie={billboardMovie}
+                showTrailerModal={showTrailerModal}
                 youTubePlayerRef={this.youTubePlayerRef}
                 onCloseTrailerModal={() => this.handleOnCloseTrailerModal()}
                 onFetchMovieTrailer={id => this.handleOnFetchMovieTrailer(id)}
@@ -128,33 +124,34 @@ class Home extends Component {
             </React.Fragment>
           )}
 
-        {!this.state.isLoading && (
-          <React.Fragment>
-            <DiscoverMoviesRow
-              movies={this.props.discover.movies_page1}
-              columnsInRow={this.props.window.columnsInRow}
-              totalItems={this.props.discover.movies_page1.results.length}
-            />
+        {!movies_page1.isFetching &&
+          !movies_page2.isFetching && (
+            <React.Fragment>
+              <DiscoverMoviesRow
+                movies={movies_page1}
+                columnsInRow={this.props.window.columnsInRow}
+                totalItems={movies_page1.results.length}
+              />
 
-            <DiscoverMoviesRow
-              movies={this.props.discover.movies_page2}
-              columnsInRow={this.props.window.columnsInRow}
-              totalItems={this.props.discover.movies_page2.results.length}
-            />
+              <DiscoverMoviesRow
+                movies={movies_page2}
+                columnsInRow={this.props.window.columnsInRow}
+                totalItems={movies_page2.results.length}
+              />
 
-            <DiscoverTVShowsRow
-              tvShows={this.props.discover.tvShows_page1}
-              columnsInRow={this.props.window.columnsInRow}
-              totalItems={this.props.discover.tvShows_page1.results.length}
-            />
+              <DiscoverTVShowsRow
+                tvShows={tvShows_page1}
+                columnsInRow={this.props.window.columnsInRow}
+                totalItems={tvShows_page1.results.length}
+              />
 
-            <DiscoverTVShowsRow
-              tvShows={this.props.discover.tvShows_page2}
-              columnsInRow={this.props.window.columnsInRow}
-              totalItems={this.props.discover.tvShows_page2.results.length}
-            />
-          </React.Fragment>
-        )}
+              <DiscoverTVShowsRow
+                tvShows={tvShows_page2}
+                columnsInRow={this.props.window.columnsInRow}
+                totalItems={tvShows_page2.results.length}
+              />
+            </React.Fragment>
+          )}
       </div>
     );
   }
@@ -163,7 +160,7 @@ class Home extends Component {
 Home.propTypes = {
   fetchDiscoverMovies: PropTypes.func.isRequired,
   fetchDiscoverTVShows: PropTypes.func.isRequired,
-  fetchBillboardVideos: PropTypes.func.isRequired,
+  fetchBillboardMovieVideos: PropTypes.func.isRequired,
   clearSearchTerm: PropTypes.func.isRequired,
   updateSearchBoxFocus: PropTypes.func.isRequired
 };
@@ -178,7 +175,10 @@ export default connect(
   {
     fetchDiscoverMovies,
     fetchDiscoverTVShows,
-    fetchBillboardVideos,
+    assignBillboardMovie,
+    fetchBillboardMovieVideos,
+    generateRandomIndex,
+    showTrailerModal,
     clearSearchTerm,
     updateSearchBoxFocus
   }

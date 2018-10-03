@@ -1,62 +1,97 @@
 import {
   FETCH_DISCOVER_MOVIES,
+  RECEIVE_DISCOVER_MOVIES,
   FETCH_DISCOVER_TV_SHOWS,
-  FETCH_BILLBOARD_VIDEOS
+  RECEIVE_DISCOVER_TV_SHOWS,
+  ASSIGN_BILLBOARD_MOVIE,
+  FETCH_BILLBOARD_MOVIE_VIDEOS,
+  RECEIVE_BILLBOARD_MOVIE_VIDEOS,
+  GENERATE_RANDOM_INDEX,
+  SHOW_TRAILER_MODAL
 } from "./types";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const year = new Date().getFullYear();
 
 export const fetchDiscoverMovies = () => dispatch => {
-  let movies_page1;
-  let movies_page2;
-
-  const promise1 = fetchByPageNumber("movie", 1, year).then(results => {
-    movies_page1 = results[0];
+  dispatch({
+    type: FETCH_DISCOVER_MOVIES,
+    payload: {
+      isFetching: true
+    }
   });
 
-  const promise2 = fetchByPageNumber("movie", 2, year).then(results => {
-    movies_page2 = results[0];
+  fetchByPageNumber("movie", 1, year).then(results => {
+    receiveDiscoverMovies(results[0], 1, dispatch);
   });
 
-  Promise.all([promise1, promise2]).then(() => {
-    dispatch({
-      type: FETCH_DISCOVER_MOVIES,
-      payload: { movies_page1, movies_page2 }
-    });
+  fetchByPageNumber("movie", 2, year).then(results => {
+    receiveDiscoverMovies(results[0], 2, dispatch);
+  });
+};
+
+export const receiveDiscoverMovies = (movies, page, dispatch) => {
+  dispatch({
+    type: RECEIVE_DISCOVER_MOVIES,
+    payload: {
+      movies,
+      page
+    }
   });
 };
 
 export const fetchDiscoverTVShows = () => dispatch => {
-  let tvShows_page1;
-  let tvShows_page2;
-  const promise1 = fetchByPageNumber("tv", 1, year).then(results => {
-    tvShows_page1 = results[0];
+  dispatch({
+    type: FETCH_DISCOVER_TV_SHOWS,
+    payload: {
+      isFetching: true
+    }
   });
 
-  const promise2 = fetchByPageNumber("tv", 2, year).then(results => {
-    tvShows_page2 = results[0];
+  fetchByPageNumber("tv", 1, year).then(results => {
+    receiveDiscoverTVShows(results[0], 1, dispatch);
   });
 
-  Promise.all([promise1, promise2]).then(() => {
-    dispatch({
-      type: FETCH_DISCOVER_TV_SHOWS,
-      payload: { tvShows_page1, tvShows_page2 }
-    });
+  fetchByPageNumber("tv", 2, year).then(results => {
+    receiveDiscoverTVShows(results[0], 2, dispatch);
   });
 };
 
-export const fetchBillboardVideos = id => dispatch => {
+export const receiveDiscoverTVShows = (tvShows, page, dispatch) => {
+  dispatch({
+    type: RECEIVE_DISCOVER_TV_SHOWS,
+    payload: {
+      tvShows,
+      page
+    }
+  });
+};
+
+export const fetchBillboardMovieVideos = id => dispatch => {
   const queryURL = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`;
+
+  dispatch({
+    type: FETCH_BILLBOARD_MOVIE_VIDEOS,
+    payload: { isFetching: true }
+  });
 
   fetch(queryURL)
     .then(response => response.json())
-    .then(videos => {
-      dispatch({
-        type: FETCH_BILLBOARD_VIDEOS,
-        payload: videos
-      });
-    });
+    .then(videos => receiveBillboardMovieVideos(videos, dispatch));
+};
+
+export const assignBillboardMovie = movie => dispatch => {
+  dispatch({
+    type: ASSIGN_BILLBOARD_MOVIE,
+    payload: movie
+  });
+};
+
+export const receiveBillboardMovieVideos = (videos, dispatch) => {
+  dispatch({
+    type: RECEIVE_BILLBOARD_MOVIE_VIDEOS,
+    payload: { videos, isFetching: false }
+  });
 };
 
 const fetchByPageNumber = (type, page, year = null) => {
@@ -75,4 +110,18 @@ const fetchByPageNumber = (type, page, year = null) => {
   const promise = fetch(queryURL).then(response => response.json());
 
   return Promise.all([promise]);
+};
+
+export const generateRandomIndex = () => dispatch => {
+  dispatch({
+    type: GENERATE_RANDOM_INDEX,
+    payload: Math.floor(Math.random() * 20)
+  });
+};
+
+export const showTrailerModal = show => dispatch => {
+  dispatch({
+    type: SHOW_TRAILER_MODAL,
+    payload: show
+  });
 };

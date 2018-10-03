@@ -24,12 +24,6 @@ BillboardRow.propTypes = {
   movies_page2: PropTypes.shape({
     results: PropTypes.array.isRequired
   }),
-  tvShows_page1: PropTypes.shape({
-    results: PropTypes.array.isRequired
-  }),
-  tvShows_page2: PropTypes.shape({
-    results: PropTypes.array.isRequired
-  }),
   billboardMovie: PropTypes.object.isRequired
 };
 

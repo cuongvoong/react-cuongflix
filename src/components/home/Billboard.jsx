@@ -6,8 +6,6 @@ import BillboardRow from "./BillboardRow";
 const Billboard = ({
   movies_page1,
   movies_page2,
-  tvShows_page1,
-  tvShows_page2,
   billboardMovie,
   onPlayTrailerClick
 }) => {
@@ -16,8 +14,6 @@ const Billboard = ({
       <BillboardRow
         movies_page1={movies_page1}
         movies_page2={movies_page2}
-        tvShows_page1={tvShows_page1}
-        tvShows_page2={tvShows_page2}
         billboardMovie={billboardMovie}
         onPlayTrailerClick={onPlayTrailerClick}
       />
@@ -30,12 +26,6 @@ Billboard.propTypes = {
     results: PropTypes.array.isRequired
   }),
   movies_page2: PropTypes.shape({
-    results: PropTypes.array.isRequired
-  }),
-  tvShows_page1: PropTypes.shape({
-    results: PropTypes.array.isRequired
-  }),
-  tvShows_page2: PropTypes.shape({
     results: PropTypes.array.isRequired
   }),
   billboardMovie: PropTypes.object.isRequired

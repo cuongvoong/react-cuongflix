@@ -13,7 +13,7 @@ const middleware = [
 ];
 
 // if (process.env.NODE_ENV !== "production") {
-//   middleware.push(createLogger());
+//   middleware.push(applyMiddleware(createLogger()));
 // }
 
 const store = createStore(rootReducer, initialState, compose(...middleware));

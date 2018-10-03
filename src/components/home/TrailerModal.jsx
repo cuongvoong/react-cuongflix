@@ -7,15 +7,15 @@ import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 import { ClipLoader } from "react-spinners";
 
 class TrailerModal extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.modalRef = React.createRef();
+    this.modalContentRef = React.createRef();
+  }
+
   state = {
-    trailerModalStyles: {
-      display: "none"
-    },
-    contentModalStyles: {
-      width: 0
-    },
-    trailer: null,
-    isLoading: true
+    trailer: null
   };
 
   componentDidUpdate(prevProps) {
@@ -27,16 +27,13 @@ class TrailerModal extends PureComponent {
         this.props.onFetchMovieTrailer(this.props.billboardMovie.id);
       }
 
-      this.setState({
-        trailerModalStyles: { display: "flex" },
-        contentModalStyles: { width: "90%" }
-      });
+      this.modalRef.current.style.display = "flex";
+      this.modalContentRef.current.style.width = "90%";
     }
 
     if (prevProps.trailer !== this.props.trailer) {
       this.setState({
-        trailer: this.props.trailer,
-        isLoading: false
+        trailer: this.props.trailer
       });
     }
   }
@@ -46,10 +43,8 @@ class TrailerModal extends PureComponent {
   }
 
   handleOnCloseTrailerModal = () => {
-    this.setState({
-      trailerModalStyles: { display: "none" },
-      contentModalStyles: { width: 0 }
-    });
+    this.modalRef.current.style.display = "none";
+    this.modalContentRef.current.style.width = "0";
     this.props.onCloseTrailerModal();
     this.props.youTubePlayerRef.current.internalPlayer.pauseVideo();
   };
@@ -58,8 +53,16 @@ class TrailerModal extends PureComponent {
     const { youTubePlayerRef, trailer } = this.props;
 
     return (
-      <div style={this.state.trailerModalStyles} className="trailer-modal">
-        <div style={this.state.contentModalStyles} className="content">
+      <div
+        ref={this.modalRef}
+        style={{ display: "none" }}
+        className="trailer-modal"
+      >
+        <div
+          ref={this.modalContentRef}
+          style={{ width: "0" }}
+          className="content"
+        >
           <div className="modal-header">
             <span>Play Trailer</span>
             <button
@@ -71,8 +74,8 @@ class TrailerModal extends PureComponent {
           </div>
 
           <div className="iframe-container">
-            <ClipLoader color={"#fff"} loading={this.state.isLoading} />
-            {!this.state.isLoading &&
+            <ClipLoader color={"#fff"} loading={this.props.isFetching} />
+            {!this.props.isFetching &&
               this.state.trailer !== null && (
                 <YouTube
                   ref={youTubePlayerRef}
