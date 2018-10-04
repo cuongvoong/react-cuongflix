@@ -19,23 +19,29 @@ const Facts = ({ details }) => {
     );
   });
 
-  const release_date = details.release_dates.results
-    .filter(r => r.iso_3166_1 === "US")
-    .reduce((acc, item) => (acc = item)).release_dates;
+  const release_date =
+    details.release_dates !== undefined
+      ? details.release_dates.results
+          .filter(r => r.iso_3166_1 === "US")
+          .reduce((acc, item) => (acc = item)).release_dates
+      : null;
 
-  const release_information = release_date.map(r => {
-    return (
-      <div key={r.type} className="release-date">
-        {toStringDate(r.release_date)}
-        <div className="certification-type-row">
-          {r.certification !== "" && (
-            <span className="certification">{r.certification}</span>
-          )}
-          <span className="type">{types[r.type]}</span>
-        </div>
-      </div>
-    );
-  });
+  const release_information =
+    details.release_dates !== undefined
+      ? release_date.map(r => {
+          return (
+            <div key={r.type} className="release-date">
+              {toStringDate(r.release_date)}
+              <div className="certification-type-row">
+                {r.certification !== "" && (
+                  <span className="certification">{r.certification}</span>
+                )}
+                <span className="type">{types[r.type]}</span>
+              </div>
+            </div>
+          );
+        })
+      : null;
 
   return (
     <section className="facts">
