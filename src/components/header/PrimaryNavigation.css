@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   height: 100%;
-  display: flex;
+  display: none;
   align-items: center;
 }
 
@@ -31,4 +31,10 @@
   color: #fff;
   font-weight: 700;
   cursor: default;
+}
+
+@media screen and (min-width: 600px) {
+  .main-header .tabbed-primary-navigation {
+    display: flex;
+  }
 }

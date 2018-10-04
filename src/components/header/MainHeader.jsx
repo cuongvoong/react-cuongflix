@@ -5,22 +5,39 @@ import "./MainHeader.css";
 import PrimaryNavigation from "./PrimaryNavigation";
 import MainViewLink from "./MainViewLink";
 import SecondaryNavigation from "./SecondaryNavigation";
+import HamburgerMenu from "./HamburgerMenu";
+import SideDrawer from "./SideDrawer";
 
 const MainHeader = ({
   onSearchInputChange,
   onSearchBoxClose,
   onSearchBoxFocus,
+  onToggleSideDrawerState,
+  onClickSideDrawerLink,
+  onClickOutsideSideDrawer,
   term,
   isSearchBoxFocused,
-  isMobile
+  isSideDrawerOpen
 }) => {
+  const hamburgerRef = React.createRef();
+
   return (
     <section className="pinning-header">
       <header className="main-header">
+        <HamburgerMenu
+          onToggleSideDrawerState={onToggleSideDrawerState}
+          hamburgerRef={hamburgerRef}
+        />
+        <SideDrawer
+          isSideDrawerOpen={isSideDrawerOpen}
+          onClickSideDrawerLink={onClickSideDrawerLink}
+          onClickOutsideSideDrawer={onClickOutsideSideDrawer}
+          hamburgerRef={hamburgerRef}
+        />
         <MainViewLink href="/" className="logo">
           <img src={logo} alt="logo" />
         </MainViewLink>
-        <PrimaryNavigation isMobile={isMobile} />
+        <PrimaryNavigation />
         <SecondaryNavigation
           onSearchInputChange={onSearchInputChange}
           onSearchBoxClose={onSearchBoxClose}

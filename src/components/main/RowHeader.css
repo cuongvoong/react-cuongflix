@@ -1,5 +1,17 @@
 .rowTitle {
   color: #e5e5e5;
-  font-size: 2vw;
+  font-size: 4vw;
   margin: 0 4% 0.5rem 4%;
+}
+
+@media screen and (min-width: 600px) {
+  .rowTitle {
+    font-size: 3vw;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .rowTitle {
+    font-size: 2vw;
+  }
 }

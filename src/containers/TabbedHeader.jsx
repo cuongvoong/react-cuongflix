@@ -10,6 +10,7 @@ import {
   clearSearchTerm,
   updateSearchBoxFocus
 } from "../store/actions/searchActions";
+import { toggleSideDrawerState } from "../store/actions/menuActions";
 
 class TabbedHeader extends Component {
   state = {
@@ -44,6 +45,18 @@ class TabbedHeader extends Component {
     this.props.updateSearchBoxFocus(focus);
   };
 
+  handleToggleSideDrawerState = () => {
+    this.props.toggleSideDrawerState();
+  };
+
+  handleClickSideDrawerLink = () => {
+    this.props.toggleSideDrawerState();
+  };
+
+  handleClickOutsideSideDrawer = () => {
+    this.props.toggleSideDrawerState();
+  };
+
   render() {
     return (
       <div className="pinning-header">
@@ -51,9 +64,12 @@ class TabbedHeader extends Component {
           onSearchInputChange={this.handleSearchInputChange}
           onSearchBoxClose={this.handleSearchBoxClose}
           onSearchBoxFocus={this.handleSearchBoxFocus}
+          onToggleSideDrawerState={this.handleToggleSideDrawerState}
           term={this.props.search.term}
           isSearchBoxFocused={this.props.search.isSearchBoxFocused}
-          isMobile={this.props.window.isMobile}
+          isSideDrawerOpen={this.props.menu.isSideDrawerOpen}
+          onClickSideDrawerLink={this.handleClickSideDrawerLink}
+          onClickOutsideSideDrawer={this.handleClickOutsideSideDrawer}
         />
         <SubHeader />
       </div>
@@ -69,7 +85,8 @@ TabbedHeader.propTypes = {
 
 const mapStateToProps = state => ({
   search: state.search,
-  window: state.window
+  window: state.window,
+  menu: state.menu
 });
 
 export default withRouter(
@@ -78,7 +95,8 @@ export default withRouter(
     {
       updateSearchTerm,
       clearSearchTerm,
-      updateSearchBoxFocus
+      updateSearchBoxFocus,
+      toggleSideDrawerState
     }
   )(TabbedHeader)
 );

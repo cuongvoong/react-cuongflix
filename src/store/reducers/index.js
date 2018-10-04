@@ -6,6 +6,7 @@ import tvShowsReducer from "./tvShowsReducer";
 import tvShowReducer from "./tvShowReducer";
 import discoverReducer from "./discoverReducer";
 import searchReducer from "./searchReducer";
+import menuReducer from "./menuReducer";
 
 export default combineReducers({
   window: windowReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   tvShows: tvShowsReducer,
   tvShow: tvShowReducer,
   discover: discoverReducer,
-  search: searchReducer
+  search: searchReducer,
+  menu: menuReducer
 });

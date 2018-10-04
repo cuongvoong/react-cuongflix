@@ -1,6 +1,5 @@
 .billboard-row {
   margin-bottom: 1.1rem;
-  /* padding-bottom: 40%; */
   background-color: #000;
   touch-action: pan-y;
   position: relative;

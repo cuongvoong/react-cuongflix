@@ -41,7 +41,7 @@ class SearchBox extends Component {
     this.props.onSearchBoxFocus(true);
     this.setState({ isUserFocusing: true }, () => {
       this.searchBoxFocusing = setTimeout(() => {
-        this.input.current.style.width = "220px";
+        this.input.current.style.width = "180px";
         this.input.current.style.opacity = 1;
         this.input.current.focus();
       }, 0);
@@ -111,7 +111,7 @@ class SearchBox extends Component {
               className="searchTab"
             >
               <span className="icon-search">
-                <FontAwesomeIcon icon={faSearch} size="2x" />
+                <FontAwesomeIcon icon={faSearch} />
               </span>
             </button>
           )}
