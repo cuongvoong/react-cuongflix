@@ -1,19 +1,68 @@
 .cast {
-  width: 100%;
-  /* max-width: 900px; */
-  overflow-x: hidden;
-
   display: flex;
-  transition: 0.1s;
-  box-sizing: border-box;
+  white-space: nowrap;
+  overflow-x: auto;
 }
 
-.cast .name {
-  padding: 10px 10px 5px 10px;
+.cast-item {
+  min-width: 25%;
+  display: inline-block;
+  margin-right: 0.25rem;
+  border: 1px solid #3e3e3e;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+  font-size: 3vw;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card img {
+  width: 100%;
+  display: block;
+}
+
+.card .name {
+  font-size: 0.8rem;
+  padding: 5px;
   font-weight: 600;
 }
 
-.cast .character {
-  font-size: 0.9rem;
-  padding: 0 10px;
+.card .character {
+  font-size: 0.7rem;
+  padding: 5px;
+}
+
+.card .no-profile {
+  width: 138px;
+  min-height: 105px;
+  padding: 20% 20%;
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 600px) {
+  .cast-item {
+    min-width: 138px;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+  }
+
+  .card .no-profile {
+    width: 138px;
+    min-height: 175px;
+    padding: 20% 20%;
+    box-sizing: border-box;
+  }
+
+  .card .name {
+    font-size: 1rem;
+  }
+
+  .card .character {
+    font-size: 0.9rem;
+  }
 }

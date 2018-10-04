@@ -1,5 +1,7 @@
 .details-info {
-  padding: 0 1rem 1rem 1rem;
+  padding: 0 0.5rem 0.5rem 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .details-info .title-rating-row {
@@ -9,19 +11,19 @@
 }
 
 .details-info .title {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: bold;
   color: #fff;
 }
 
 .details-info .rating {
   display: flex;
-  /* margin-left: auto; */
   align-items: center;
+  margin-left: auto;
 }
 
 .details-info .rating-text {
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin-left: 0.2rem;
 }
 
@@ -40,6 +42,11 @@
 }
 
 @media screen and (min-width: 800px) {
+  .details-info {
+    width: 75%;
+    padding: 0 1rem 1rem 1rem;
+  }
+
   .details-info .title {
     font-size: 2rem;
   }
