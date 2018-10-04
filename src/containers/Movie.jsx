@@ -6,20 +6,16 @@ import Poster from "../components/shared/Poster";
 import Trailer from "../components/shared/Trailer";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import {
-  fetchMovieDetails,
-  fetchMovieCredits
-} from "../store/actions/movieActions";
+import { fetchMovieDetails } from "../store/actions/movieActions";
 
 class Movie extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.fetchMovieDetails(id);
-    this.props.fetchMovieCredits(id);
   }
 
   render() {
-    const { details, credits } = this.props.movie;
+    const { details } = this.props.movie;
     return (
       <div className="mainView">
         {details.status_message && <Redirect to="/error" />}
@@ -31,10 +27,9 @@ class Movie extends Component {
               <Trailer trailers={details.videos} />
             </section>
           )}
-          {!details.isFetching &&
-            !credits.isFetching && (
-              <Details details={details} credits={credits} />
-            )}
+          {!details.isFetching && (
+            <Details details={details} credits={details.credits} />
+          )}
         </section>
       </div>
     );
@@ -43,15 +38,13 @@ class Movie extends Component {
 
 Movie.propTypes = {
   fetchMovieDetails: PropTypes.func.isRequired,
-  fetchMovieCredits: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired
     })
   }),
   movie: PropTypes.shape({
-    details: PropTypes.object.isRequired,
-    credits: PropTypes.object.isRequired
+    details: PropTypes.object.isRequired
   })
 };
 
@@ -61,5 +54,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchMovieDetails, fetchMovieCredits }
+  { fetchMovieDetails }
 )(Movie);

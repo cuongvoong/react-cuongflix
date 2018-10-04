@@ -1,9 +1,4 @@
-import {
-  FETCH_MOVIE_DETAILS,
-  FETCH_MOVIE_CREDITS,
-  RECEIVE_MOVIE_DETAILS,
-  RECEIVE_MOVIE_CREDITS
-} from "../actions/types";
+import { FETCH_MOVIE_DETAILS, RECEIVE_MOVIE_DETAILS } from "../actions/types";
 
 const initialState = {
   details: {
@@ -14,10 +9,9 @@ const initialState = {
     release_dates: {
       results: []
     },
-    isFetching: true
-  },
-  credits: {
-    cast: [],
+    credits: {
+      cast: []
+    },
     isFetching: true
   }
 };
@@ -38,25 +32,6 @@ export default (state = initialState, action) => {
         ...state,
         details: {
           ...state.details,
-          isFetching: false,
-          ...action.payload
-        }
-      };
-
-    case FETCH_MOVIE_CREDITS:
-      return {
-        ...state,
-        credits: {
-          ...state.credits,
-          isFetching: action.payload.isFetching
-        }
-      };
-
-    case RECEIVE_MOVIE_CREDITS:
-      return {
-        ...state,
-        credits: {
-          ...state.credits,
           isFetching: false,
           ...action.payload
         }

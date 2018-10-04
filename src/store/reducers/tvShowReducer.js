@@ -1,8 +1,6 @@
 import {
   FETCH_TV_SHOW_DETAILS,
-  FETCH_TV_SHOW_CREDITS,
-  RECEIVE_TV_SHOW_DETAILS,
-  RECEIVE_TV_SHOW_CREDITS
+  RECEIVE_TV_SHOW_DETAILS
 } from "../actions/types";
 
 const initialState = {
@@ -11,10 +9,10 @@ const initialState = {
     videos: {
       results: []
     },
-    isFetching: true
-  },
-  credits: {
-    cast: [],
+    credits: {
+      cast: [],
+      isFetching: true
+    },
     isFetching: true
   }
 };
@@ -34,23 +32,6 @@ export default (state = initialState, action) => {
         ...state,
         details: {
           ...state.details,
-          isFetching: false,
-          ...action.payload
-        }
-      };
-    case FETCH_TV_SHOW_CREDITS:
-      return {
-        ...state,
-        credits: {
-          ...state.credits,
-          isFetching: action.payload.isFetching
-        }
-      };
-    case RECEIVE_TV_SHOW_CREDITS:
-      return {
-        ...state,
-        credits: {
-          ...state.credits,
           isFetching: false,
           ...action.payload
         }
