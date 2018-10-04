@@ -1,6 +1,6 @@
 .billboard .info {
   top: 0;
-  width: 50%;
+  width: 60%;
   padding-left: 4%;
   box-sizing: border-box;
 }
@@ -18,7 +18,7 @@
 }
 
 .billboard-row .billboard-overview {
-  font-size: 2.8vw;
+  font-size: 2.5vw;
   transition: 0.3s;
   font-weight: bold;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
@@ -88,12 +88,16 @@
 
 @media screen and (min-width: 600px) {
   .billboard-row .billboard-overview {
-    font-size: 2.2vw;
+    font-size: 2.3vw;
   }
 }
 
 @media screen and (min-width: 900px) {
   .billboard-row .billboard-overview {
     font-size: 1.8vw;
+  }
+
+  .billboard .info {
+    width: 50%;
   }
 }
