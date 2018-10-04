@@ -26,7 +26,18 @@
   display: block;
   padding: 1rem 1rem 1rem 2rem;
   text-decoration: none;
+  color: #a5a5a5;
+}
+
+.side-drawer li.current {
+  border-left: 5px solid red;
+  font-weight: 700;
+  box-sizing: border-box;
+}
+
+.side-drawer a.current {
   color: #fff;
+  font-weight: 700;
 }
 
 .side-drawer a:hover {

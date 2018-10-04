@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import MainViewLink from "./MainViewLink";
 import "./SideDrawer.css";
 
 class SideDrawer extends Component {
@@ -40,25 +41,35 @@ class SideDrawer extends Component {
 
   render() {
     const { isSideDrawerOpen } = this.props;
+    const { pathname } = this.props.location;
 
     const sideDrawerClasses = "side-drawer" + (isSideDrawerOpen ? " show" : "");
     return (
       <div className={sideDrawerClasses} ref={this.setWrapperRef}>
-        <ul>
-          <li>
-            <Link onClick={this.handleClickLink} to="/">
+        <ul onClick={this.handleClickLink}>
+          <li className={pathname === "/" ? " current" : ""}>
+            <MainViewLink
+              href="/"
+              className={pathname === "/" ? "current" : ""}
+            >
               Home
-            </Link>
+            </MainViewLink>
           </li>
-          <li>
-            <Link onClick={this.handleClickLink} to="/tvshows">
+          <li className={pathname === "/tvshows" ? " current" : ""}>
+            <MainViewLink
+              href="/tvshows"
+              className={pathname === "/tvshows" ? "current" : ""}
+            >
               TV Shows
-            </Link>
+            </MainViewLink>
           </li>
-          <li>
-            <Link onClick={this.handleClickLink} to="/movies">
+          <li className={pathname === "/movies" ? " current" : ""}>
+            <MainViewLink
+              href="/movies"
+              className={pathname === "/movies" ? "current" : ""}
+            >
               Movies
-            </Link>
+            </MainViewLink>
           </li>
         </ul>
       </div>
@@ -70,4 +81,4 @@ SideDrawer.propTypes = {
   isSideDrawerOpen: PropTypes.bool.isRequired
 };
 
-export default SideDrawer;
+export default withRouter(SideDrawer);
