@@ -11,6 +11,9 @@ const initialState = {
     videos: {
       results: []
     },
+    release_dates: {
+      results: []
+    },
     isFetching: true
   },
   credits: {

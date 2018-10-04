@@ -19,6 +19,24 @@ const Facts = ({ details }) => {
     );
   });
 
+  const release_date = details.release_dates.results
+    .filter(r => r.iso_3166_1 === "US")
+    .reduce((acc, item) => (acc = item)).release_dates;
+
+  const release_information = release_date.map(r => {
+    return (
+      <div key={r.type} className="release-date">
+        {toStringDate(r.release_date)}
+        <div className="certification-type-row">
+          {r.certification !== "" && (
+            <span className="certification">{r.certification}</span>
+          )}
+          <span className="type">{types[r.type]}</span>
+        </div>
+      </div>
+    );
+  });
+
   return (
     <section className="facts">
       <h3>Facts</h3>
@@ -27,12 +45,10 @@ const Facts = ({ details }) => {
         <div className="status-text">{details.status}</div>
       </section>
       <section className="release-information">
-        {details.release_date && (
+        {release_date && (
           <React.Fragment>
             <h4>Release Information</h4>
-            <div className="release-date">
-              {toStringDate(details.release_date)}
-            </div>
+            {release_information}
           </React.Fragment>
         )}
         {details.first_air_date && (
@@ -45,7 +61,7 @@ const Facts = ({ details }) => {
         )}
       </section>
       <section className="genre">
-        <h4>Genre</h4>
+        <h4>Genres</h4>
         {genres}
       </section>
       {details.homepage && (
@@ -96,6 +112,15 @@ const formatRuntime = timeInMinutes => {
   }
 
   return `${timeInMinutes}m`;
+};
+
+const types = {
+  1: "Premiere",
+  2: "Theatrical (limited)",
+  3: "Theatrical",
+  4: "Digital",
+  5: "Physical",
+  6: "TV"
 };
 
 export default Facts;
