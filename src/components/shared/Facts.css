@@ -1,8 +1,8 @@
 .facts {
   display: none;
+  width: 25%;
   padding: 0 1rem 1rem 1rem;
   background: #222;
-  height: 100%;
   overflow-wrap: break-word;
   word-break: break-all;
   z-index: 20;
