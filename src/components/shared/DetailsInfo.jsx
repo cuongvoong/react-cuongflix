@@ -25,7 +25,7 @@ const DetailsInfo = ({ details, credits }) => {
       </section>
       <h4 className="overview-header">Overview</h4>
       <section className="overview">{details.overview}</section>
-      <Credits credits={credits} />
+      {credits.cast.length !== 0 && <Credits credits={credits} />}
       {/* <Videos videos={details.videos} /> */}
     </section>
   );

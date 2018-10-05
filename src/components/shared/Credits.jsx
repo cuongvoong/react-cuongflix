@@ -10,12 +10,8 @@ const Credits = ({ credits }) => {
 
   return (
     <section className="credits">
-      {cast.length !== 0 && (
-        <React.Fragment>
-          <h4>Cast</h4>
-          <section className="cast">{cast}</section>
-        </React.Fragment>
-      )}
+      <h4>Cast</h4>
+      <section className="cast">{cast}</section>
     </section>
   );
 };
