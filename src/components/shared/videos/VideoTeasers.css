@@ -1,0 +1,26 @@
+.videos .video-teasers {
+  width: 100%;
+  display: inline-block;
+}
+
+.videos .video-teasers .teaser {
+  width: 48%;
+  display: inline-block;
+  margin-right: 2%;
+  margin-bottom: 2%;
+}
+
+.videos .video-teasers .video-teaser-wrapper {
+  overflow: hidden;
+  padding-top: 56.25%;
+  position: relative;
+}
+
+.videos .video-teasers .video-teaser-wrapper iframe {
+  border: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}

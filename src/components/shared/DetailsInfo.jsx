@@ -4,7 +4,7 @@ import "./DetailsInfo.css";
 import Credits from "./Credits";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-// import Videos from "./Videos";
+import Videos from "./videos/Videos";
 
 const DetailsInfo = ({ details, credits }) => {
   return (
@@ -26,7 +26,7 @@ const DetailsInfo = ({ details, credits }) => {
       <h4 className="overview-header">Overview</h4>
       <section className="overview">{details.overview}</section>
       {credits.cast.length !== 0 && <Credits credits={credits} />}
-      {/* <Videos videos={details.videos} /> */}
+      <Videos videos={details.videos} />
     </section>
   );
 };
