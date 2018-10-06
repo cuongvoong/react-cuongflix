@@ -21,26 +21,28 @@ const Facts = ({ details }) => {
 
   const release_date =
     details.release_dates !== undefined
-      ? details.release_dates.results
-          .filter(r => r.iso_3166_1 === "US")
-          .reduce((acc, item) => (acc = item)).release_dates
+      ? details.release_dates.results.filter(r => r.iso_3166_1 === "US")
       : null;
 
   const release_information =
     details.release_dates !== undefined
-      ? release_date.map(r => {
-          return (
-            <div key={r.type} className="release-date">
-              {toStringDate(r.release_date)}
-              <div className="certification-type-row">
-                {r.certification !== "" && (
-                  <span className="certification">{r.certification}</span>
-                )}
-                <span className="type">{types[r.type]}</span>
+      ? release_date.map(r =>
+          r.release_dates.map(release => {
+            return (
+              <div key={release.type} className="release-date">
+                {toStringDate(release.release_date)}
+                <div className="certification-type-row">
+                  {release.certification !== "" && (
+                    <span className="certification">
+                      {release.certification}
+                    </span>
+                  )}
+                  <span className="type">{types[release.type]}</span>
+                </div>
               </div>
-            </div>
-          );
-        })
+            );
+          })
+        )
       : null;
 
   return (
@@ -55,6 +57,8 @@ const Facts = ({ details }) => {
           <React.Fragment>
             <h4>Release Information</h4>
             {release_information}
+            {release_information.length === 0 &&
+              toStringDate(details.release_date)}
           </React.Fragment>
         )}
         {details.first_air_date && (

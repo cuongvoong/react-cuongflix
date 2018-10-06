@@ -9,7 +9,6 @@ import {
   detectMobile
 } from "../store/actions/windowActions";
 import CuongFlix from "./CuongFlix";
-import ScrollToTop from "./ScrollToTop";
 
 class App extends Component {
   componentDidMount() {
@@ -42,9 +41,7 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <Router>
-            <ScrollToTop>
-              <CuongFlix />
-            </ScrollToTop>
+            <CuongFlix />
           </Router>
         </div>
       </Provider>

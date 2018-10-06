@@ -4,13 +4,18 @@ import PrimaryNavigation from "./PrimaryNavigation";
 import MainViewLink from "./MainViewLink";
 
 describe("<PrimaryNavigation />", () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(
+      <PrimaryNavigation.WrappedComponent location={{ pathname: "/" }} />
+    );
+  });
+
   it("should render 3 <MainViewLink />", () => {
-    const wrapper = shallow(<PrimaryNavigation />);
     expect(wrapper.find(MainViewLink)).toHaveLength(3);
   });
 
   it("should have a first <MainViewLink /> with props href='/'", () => {
-    const wrapper = shallow(<PrimaryNavigation />);
     expect(
       wrapper
         .find(MainViewLink)
@@ -20,7 +25,6 @@ describe("<PrimaryNavigation />", () => {
   });
 
   it("should have a first <MainViewLink /> with children equal 'Home'", () => {
-    const wrapper = shallow(<PrimaryNavigation />);
     expect(
       wrapper
         .find(MainViewLink)
@@ -30,7 +34,6 @@ describe("<PrimaryNavigation />", () => {
   });
 
   it("should have a second <MainViewLink /> with props href='/tvshows'", () => {
-    const wrapper = shallow(<PrimaryNavigation />);
     expect(
       wrapper
         .find(MainViewLink)
@@ -40,7 +43,6 @@ describe("<PrimaryNavigation />", () => {
   });
 
   it("should have a second <MainViewLink /> with children equal 'TV Shows'", () => {
-    const wrapper = shallow(<PrimaryNavigation />);
     expect(
       wrapper
         .find(MainViewLink)
@@ -50,7 +52,6 @@ describe("<PrimaryNavigation />", () => {
   });
 
   it("should have a third <MainViewLink /> with props href='/movies'", () => {
-    const wrapper = shallow(<PrimaryNavigation />);
     expect(
       wrapper
         .find(MainViewLink)
@@ -60,7 +61,6 @@ describe("<PrimaryNavigation />", () => {
   });
 
   it("should have a third <MainViewLink /> with children equal 'Movies'", () => {
-    const wrapper = shallow(<PrimaryNavigation />);
     expect(
       wrapper
         .find(MainViewLink)

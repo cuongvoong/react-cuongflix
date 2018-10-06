@@ -9,7 +9,8 @@ const createTestProps = () => ({
     title: "Solo: A Star Wars Story",
     overview:
       "Through a series of daring escapades deep within a dark and dangerous criminal underworld, Han Solo meets his mighty future copilot Chewbacca and encounters the notorious gambler Lando Calrissian."
-  }
+  },
+  onPlayTrailerClick: () => {}
 });
 
 describe("<BillboardOverlay />", () => {

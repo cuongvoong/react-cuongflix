@@ -6,7 +6,8 @@ import {
   ASSIGN_BILLBOARD_MOVIE,
   FETCH_BILLBOARD_MOVIE_VIDEOS,
   RECEIVE_BILLBOARD_MOVIE_VIDEOS,
-  SHOW_TRAILER_MODAL
+  SHOW_TRAILER_MODAL,
+  RESET_BILLBOARD_MOVIE_VIDEOS
 } from "../actions/types";
 
 const initialState = {
@@ -32,7 +33,6 @@ const initialState = {
       results: []
     }
   },
-  randomIndex: 0,
   showTrailerModal: false
 };
 
@@ -146,6 +146,18 @@ export default (state = initialState, action) => {
         ...state,
         showTrailerModal: action.payload
       };
+    case RESET_BILLBOARD_MOVIE_VIDEOS:
+      return {
+        ...state,
+        billboardMovie: {
+          ...state.billboardMovie,
+          videos: {
+            isFetching: false,
+            results: []
+          }
+        }
+      };
+
     default:
       return state;
   }

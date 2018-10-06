@@ -9,7 +9,8 @@ import {
   fetchDiscoverTVShows,
   assignBillboardMovie,
   fetchBillboardMovieVideos,
-  showTrailerModal
+  showTrailerModal,
+  resetBillboardMovieVideos
 } from "../store/actions/discoverActions";
 import DiscoverMoviesRow from "../components/discover/DiscoverMoviesRow";
 import DiscoverTVShowsRow from "../components/discover/DiscoverTVShowsRow";
@@ -69,30 +70,20 @@ class Home extends Component {
     return movie.backdrop_path === null;
   };
 
-  calculateBillboardTrailer = () => {
-    const { videos } = this.props.discover.billboardMovie;
-
-    const videoTrailers = videos.results.find(video => {
-      return video.type === "Trailer" && video.site === "YouTube";
-    })
-      ? videos.results.filter(
-          video => video.type === "Trailer" && video.site === "YouTube"
-        )
-      : videos.results.filter(video => video.site === "YouTube");
-
-    return videoTrailers.length > 0 ? videoTrailers[0] : null;
-  };
-
-  handleOnPlayTrailerClick = () => {
+  handlePlayTrailerClick = () => {
     this.props.showTrailerModal(true);
   };
 
-  handleOnFetchMovieTrailer = id => {
+  handleFetchMovieTrailer = id => {
     this.props.fetchBillboardMovieVideos(id);
   };
 
-  handleOnCloseTrailerModal = () => {
+  handleCloseTrailerModal = () => {
     this.props.showTrailerModal(false);
+  };
+
+  handleResetBillboardVideos = () => {
+    this.props.resetBillboardMovieVideos();
   };
 
   render() {
@@ -115,17 +106,17 @@ class Home extends Component {
                 movies_page1={movies_page1}
                 movies_page2={movies_page2}
                 billboardMovie={billboardMovie}
-                onPlayTrailerClick={() => this.handleOnPlayTrailerClick()}
+                onPlayTrailerClick={() => this.handlePlayTrailerClick()}
               />
 
               <TrailerModal
-                trailer={this.calculateBillboardTrailer()}
                 isFetching={billboardMovie.videos.isFetching}
                 billboardMovie={billboardMovie}
                 showTrailerModal={showTrailerModal}
                 youTubePlayerRef={this.youTubePlayerRef}
-                onCloseTrailerModal={() => this.handleOnCloseTrailerModal()}
-                onFetchMovieTrailer={id => this.handleOnFetchMovieTrailer(id)}
+                onCloseTrailerModal={() => this.handleCloseTrailerModal()}
+                onFetchMovieTrailer={id => this.handleFetchMovieTrailer(id)}
+                onResetBillboardVideos={() => this.handleResetBillboardVideos()}
               />
             </React.Fragment>
           )}
@@ -184,6 +175,7 @@ export default connect(
     assignBillboardMovie,
     fetchBillboardMovieVideos,
     showTrailerModal,
+    resetBillboardMovieVideos,
     clearSearchTerm,
     updateSearchBoxFocus
   }

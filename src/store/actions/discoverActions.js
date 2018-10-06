@@ -6,7 +6,8 @@ import {
   ASSIGN_BILLBOARD_MOVIE,
   FETCH_BILLBOARD_MOVIE_VIDEOS,
   RECEIVE_BILLBOARD_MOVIE_VIDEOS,
-  SHOW_TRAILER_MODAL
+  SHOW_TRAILER_MODAL,
+  RESET_BILLBOARD_MOVIE_VIDEOS
 } from "./types";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -115,5 +116,12 @@ export const showTrailerModal = show => dispatch => {
   dispatch({
     type: SHOW_TRAILER_MODAL,
     payload: show
+  });
+};
+
+export const resetBillboardMovieVideos = () => dispatch => {
+  dispatch({
+    type: RESET_BILLBOARD_MOVIE_VIDEOS,
+    payload: null
   });
 };

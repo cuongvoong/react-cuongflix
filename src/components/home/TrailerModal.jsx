@@ -23,7 +23,7 @@ class TrailerModal extends PureComponent {
       prevProps.showTrailerModal !== this.props.showTrailerModal &&
       this.props.showTrailerModal
     ) {
-      if (this.props.youTubePlayerRef.current === null) {
+      if (this.state.trailer === null) {
         this.props.onFetchMovieTrailer(this.props.billboardMovie.id);
       }
 
@@ -31,16 +31,34 @@ class TrailerModal extends PureComponent {
       this.modalContentRef.current.style.width = "90%";
     }
 
-    if (prevProps.trailer !== this.props.trailer) {
+    if (prevProps.billboardMovie !== this.props.billboardMovie) {
+      const trailer = this.calculateBillboardTrailer();
       this.setState({
-        trailer: this.props.trailer
+        trailer
       });
     }
   }
 
   componentWillUnmount() {
     this.setState({ trailer: null });
+    if (this.props.billboardMovie.videos.results.length !== 0) {
+      this.props.onResetBillboardVideos();
+    }
   }
+
+  calculateBillboardTrailer = () => {
+    const { videos } = this.props.billboardMovie;
+
+    const videoTrailers = videos.results.find(video => {
+      return video.type === "Trailer" && video.site === "YouTube";
+    })
+      ? videos.results.filter(
+          video => video.type === "Trailer" && video.site === "YouTube"
+        )
+      : videos.results.filter(video => video.site === "YouTube");
+
+    return videoTrailers.length > 0 ? videoTrailers[0] : null;
+  };
 
   handleOnCloseTrailerModal = () => {
     this.modalRef.current.style.display = "none";
@@ -52,7 +70,7 @@ class TrailerModal extends PureComponent {
   };
 
   render() {
-    const { youTubePlayerRef, trailer } = this.props;
+    const { youTubePlayerRef, isFetching } = this.props;
 
     return (
       <div
@@ -74,17 +92,17 @@ class TrailerModal extends PureComponent {
               <FontAwesomeIcon icon={faTimesCircle} size="2x" color="white" />
             </button>
           </div>
-          {this.props.isFetching && (
+          {isFetching && (
             <div className="loader">
-              <ClipLoader color={"#fff"} loading={this.props.isFetching} />
+              <ClipLoader color={"#fff"} loading={isFetching} />
             </div>
           )}
-          {!this.props.isFetching &&
+          {!isFetching &&
             this.state.trailer !== null && (
               <div className="iframe-container">
                 <YouTube
                   ref={youTubePlayerRef}
-                  videoId={trailer.key}
+                  videoId={this.state.trailer.key}
                   opts={{
                     playerVars: { rel: 0 }
                   }}
@@ -92,7 +110,7 @@ class TrailerModal extends PureComponent {
               </div>
             )}
 
-          {!this.props.isFetching &&
+          {!isFetching &&
             this.state.trailer === null && (
               <div className="loader">
                 There are no trailers for this movie!
@@ -105,7 +123,6 @@ class TrailerModal extends PureComponent {
 }
 
 TrailerModal.propTypes = {
-  trailer: PropTypes.object,
   onCloseTrailerModal: PropTypes.func.isRequired,
   onFetchMovieTrailer: PropTypes.func.isRequired,
   showTrailerModal: PropTypes.bool.isRequired,
